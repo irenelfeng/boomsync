@@ -3,11 +3,12 @@ import boomerang from './boomerang.svg'
 import bird from './bird.svg'
 import './Play.css'
 
-const birdSpeed = 1
-const boomSpeed = 1
-const boomReturnTime = 1000
-const tickInterval = 5
+let birdSpeed = 1
+let boomSpeed = 1
+let boomReturnTime = 1500
+let tickInterval = 5
 
+const dist = ([x1, y1], [x2, y2]) => Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
 const print = (s) => (console.log(s), s)
 
 export default class Play extends Component {
@@ -19,9 +20,10 @@ export default class Play extends Component {
 
   componentWillMount () {
     if (!playCoords) setPlayCoords()
+    boomSpeed = (playCoords[1] / boomReturnTime) * 2
 
     this.state.birds = this.props.level.events.map(({type, time}) =>
-      [(playCoords[0] / 2) + time * birdSpeed, 50]
+      [(playCoords[0] / 2) + (time * birdSpeed), 50]
     )
   }
 
@@ -43,11 +45,12 @@ export default class Play extends Component {
   }
 
   tick = () => {
-
     // check for crossed birds
-    const birdsCrossed = this.state.birds.filter(b => false) // TODO
+    const birdsCrossed = this.state.birds.filter(b => b[0] < -300) // TODO
     // check for collisions
-    const birdsDead = this.state.birds.map(b => false) // TODO
+    const birdsDead = this.state.birds.map(b =>
+      this.state.boomerangs.filter(({coords}) => dist(b, coords) < 50).length > 0
+    )
     // check for returned boomerangs
     const boomerangsReturned = this.state.boomerangs.map(b => false) // TODO
 
@@ -61,8 +64,8 @@ export default class Play extends Component {
     // Update bird position
     this.state.birds = this.state.birds.map(([x,y], idx) => !birdsDead[idx]
       ? [x - birdSpeed * tickInterval, y]
-      : []
-    )
+      : undefined
+    ).filter(b => b)
 
     // Update boomerang position
     this.state.boomerangs = this.state.boomerangs.map(({coords, rotation, flightAngle, wayBack}) =>

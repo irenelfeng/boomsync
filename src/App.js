@@ -43,6 +43,7 @@ export default class App extends Component {
 
   changePage = (page) => {
     this.setState(() => ({
+      isSubmitted: false,
       level: page - 1,
       playing: false,
       failed: null,
@@ -114,11 +115,11 @@ export default class App extends Component {
                 </Button>
                 <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
                   {this.state.isSubmitted
-                    ? this.state.readyForNext
-                      ? this.state.playing
-                        ? 'Running'
-                        : 'Next'
-                      : 'Try Again'
+                    ? !this.state.playing
+                      ? this.state.readyForNext
+                        ? 'Next'
+                        : 'Try Again'
+                      : 'Running'
                     : 'Submit'
                   }
                 </Button>

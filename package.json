@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^2.9.0",
     "brace": "^0.10.0",
     "react": "^15.5.3",
     "react-ace": "^4.2.0",

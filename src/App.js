@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
-import AceEditor from 'react-ace';
-import brace from 'brace';
-import 'brace/mode/javascript';
-import 'brace/theme/solarized_dark';
-import 'brace/ext/language_tools';
+import { Button } from 'antd';
 import './App.css'
 import Play from './Play'
 import Preview from './Preview'
 import levels from './levels'
+import CodeEditor from './CodeEditor'
 
-class App extends Component {
+export default class App extends Component {
   state = {
     playing: false,
     level: 0  // this is just an index
+    isSubmitted: false
+  }
+
+  handleClick = () => {
+    this.setState(prevState => ({
+      playing: true,
+      isSubmitted: !prevState.isSubmitted
+    }))
   }
 
   play = () => this.setState({playing: true})
@@ -26,22 +31,15 @@ class App extends Component {
           <p className="Game-description">
             Welcome to <code>boomsync</code>!
           </p>
-          <AceEditor
-            mode="javascript"
-            theme="solarized_dark"
-            name="code editor"
-            height="6em"
-            setOptions={{
-              enableBasicAutocompletion: true,
-              enableLiveAutocompletion: false,
-              tabSize: 4,
-              fontSize: 14,
-              showGutter: true
-            }}
-          />
-          <a onClick={this.play} >
-            Go!
-          </a>
+          <CodeEditor />
+          <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
+            {this.state.isSubmitted
+              ? this.state.playing
+                ? 'Running'
+                : 'Next'
+              : 'Submit'
+            }
+          </Button>
         </div>
         <div className="Right-sidebar">
           {playing
@@ -53,5 +51,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

@@ -38,6 +38,7 @@ export default class CodeEditor extends Component {
         onChange={this.handleChange}
         height="50%"
         width="100%"
+        style={this.props.style}
       />
     );
   }

@@ -2,17 +2,17 @@ const levels = [
   {
     "level": 0,
     "initialCode": "chill(500, () => \n // write your code here \n );",
-    "instructions": [`Welcome to boomsync, where we will learn how to
-    program asynchronously in Javascript.
-    For this level, we need to throw a boomerang to kill a bird in <b>1000</b> ms.`,
-    `You have two functions available to you: <code>chill()</code>,
-    which takes in two parameters: how long you wait in milliseconds.
-    The second parameter should be a function that will be executed after
-    we chill for some milliseconds. This is called a <i> callback </i> function.`,
-    `You also have the the <code>throwBoomerang()</code> function which throws your boomerang.
-    It only has a callback function as a parameter, executing after the boomerang is thrown.`,
-    `In the editor below, chill for <b>1000</b> ms and then
-    call <code>throwBoomerang()</code> in the callback.`
+    "instructions": [
+      `Welcome to boomsync, where we will learn how to program asynchronously in Javascript.
+      For this level, we need to throw a boomerang to kill a bird in <b>1000</b> ms.`,
+      `You have two functions available to you: <code>chill()</code>,
+      which takes in two parameters: how long you wait in milliseconds.
+      The second parameter should be a function that will be executed after
+      we chill for some milliseconds. This is called a <i> callback </i> function.`,
+      `You also have the the <code>throwBoomerang()</code> function which throws your boomerang.
+      It only has a callback function as a parameter, executing after the boomerang is thrown.`,
+      `In the editor below, chill for <b>1000</b> ms and then
+      call <code>throwBoomerang()</code> in the callback.`
     ],
     "events": [
       {

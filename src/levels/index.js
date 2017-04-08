@@ -1,7 +1,7 @@
 const levels = [
   {
     "level": 0,
-    "initialcode": "chill(500, () => \n // write your code here \n );",
+    "initialCode": "chill(500, () => \n // write your code here \n );",
     "instructions": [`Welcome to boomsync, where we will learn how to
     program asynchronously in Javascript.
     For this level, we need to throw a boomerang to kill a bird in <b>1000</b> ms.`,

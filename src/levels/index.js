@@ -1,7 +1,6 @@
 const levels = [
-  {}, // no level 0 lol
   {
-    "level": 1,
+    "level": 0,
     "initialcode": "chill(500, () => \n // write your code here \n );",
     "instructions": [`Welcome to boomsync, where we will learn how to
     program asynchronously in Javascript.
@@ -23,7 +22,7 @@ const levels = [
     ]
   },
   {
-    "level": 2,
+    "level": 1,
     "instructions": [`Great job! However, this code did not take full advantage of 
     the power of asynchronization. We could have just executed the <code>chill()</code> 
     function and then the <code>throwBoomerang()</code> function synchronously without callbacks.`,

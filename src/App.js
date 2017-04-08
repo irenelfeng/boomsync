@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Button } from 'antd';
 import './App.css'
 import Play from './Play'
 import Preview from './Preview'
@@ -6,7 +7,15 @@ import CodeEditor from './CodeEditor'
 
 class App extends Component {
   state = {
-    playing: false
+    playing: false,
+    isSubmitted: false
+  }
+
+  handleClick = () => {
+    this.setState(prevState => ({
+      playing: true,
+      isSubmitted: !prevState.isSubmitted
+    }));
   }
 
   play = () => this.setState({playing: true})
@@ -21,6 +30,14 @@ class App extends Component {
             Welcome to <code>boomsync</code>!
           </p>
           <CodeEditor />
+          <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
+            {this.state.isSubmitted
+              ? this.state.playing
+                ? 'Running'
+                : 'Next'
+              : 'Submit'
+            }
+          </Button>
         </div>
         <div className="Right-sidebar">
           {playing

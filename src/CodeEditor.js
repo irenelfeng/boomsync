@@ -5,9 +5,6 @@ import 'brace/theme/solarized_dark'
 import 'brace/ext/language_tools'
 import 'brace/keybinding/vim'
 
-function onLoad(editor) {
-  console.log('i\'ve loaded');
-}
 
 export default class CodeEditor extends Component {
   reloadProps() {

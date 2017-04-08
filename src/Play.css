@@ -1,12 +1,15 @@
 .bird {
   position: absolute;
+  height: 100px;
 }
 
 .boomerang {
   position: absolute;
+  height: 100px;
 }
 
 .play {
   height: 100%;
   text-align: left;
+  background-image: url('/bg_wider.svg');
 }

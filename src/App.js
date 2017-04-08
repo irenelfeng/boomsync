@@ -5,6 +5,7 @@ import Play from './Play'
 import Preview from './Preview'
 import levels from './levels'
 import CodeEditor from './CodeEditor'
+import LevelIndicator from './LevelIndicator'
 
 export default class App extends Component {
   state = {
@@ -18,22 +19,33 @@ export default class App extends Component {
   handleClick = () => {
     this.setState(prevState => ({
       playing: true,
-      isSubmitted: !prevState.isSubmitted
+      isSubmitted: !prevState.isSubmitted,
+      code: this.refs.code.getContents()
+    }))
+  }
+
+  handleResetClick = () => { // TODO
+    this.setState(() => ({
+      playing: false,
+      done: false,
+      failed: null
     }))
   }
 
   succeed = () => {
     this.setState(() => ({
       failed: false,
-      done: true
-    }));
+      done: true,
+      playing: false,
+    }))
   }
 
-  failed = (err) => {
+  fail = (err) => {
     this.setState(() => ({
       failed: err,
-      done: true
-    }));
+      done: true,
+      playing: false
+    }))
   }
 
   play = () => this.setState({ playing: true })
@@ -46,9 +58,13 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="Left-sidebar">
+          <LevelIndicator />
           <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
           </div>
-          <CodeEditor {...{initialcode}}/>
+          <CodeEditor {...{initialcode}} ref='code' />
+          <Button type="danger" lonClick={this.handleResetClick}>
+            Reset
+          </Button>
           <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
             {this.state.isSubmitted
               ? this.state.playing
@@ -60,7 +76,7 @@ export default class App extends Component {
         </div>
         <div className="Right-sidebar">
           { playing
-            ? <Play {...{level: levels[level], code, failed: this.failed, succeed: this.succeed}} />
+            ? <Play {...{level: levels[level], code, fail: this.fail, succeed: this.succeed}} />
             : <Preview {...{level}} />
           }
         </div>

@@ -89,11 +89,13 @@ export default class App extends Component {
         <div className="Left-sidebar">
           <Layout>
             <Header>
+              <span className="logo">LOGO</span>
               <LevelIndicator changePage={this.changePage} level={level + 1} />
             </Header>
             <Content style={{
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                backgroundColor: '#f9f7f0'
               }}
             >
               <div className="Game-description">

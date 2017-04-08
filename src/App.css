@@ -1,8 +1,23 @@
 @import '~antd/dist/antd.css';
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+.ant-layout-header {
+  background-color: #76a49a;
+}
+
+Header {
+  
+}
+
+.ant-pagination-item, .ant-pagination-prev, .ant-pagination-next {
+  background-color: #bde5ec;
+  border: 1px solid #a1abe9;
+  color: #fcfcfc;
+}
 
 .App {
   text-align: center;
-  display: flex;
+  display: flex;#fcfcfc
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -17,6 +32,8 @@
   text-align: left;
   overflow: scroll;
   padding: 10px;
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .Left-sidebar {

@@ -42,7 +42,6 @@ export default class App extends Component {
   }
 
   changePage = (page) => {
-    console.log("CHANGE PAGE BEING CALLED")
     this.setState(() => ({
       level: page - 1,
       playing: false,
@@ -66,11 +65,22 @@ export default class App extends Component {
   }
 
   play = () => this.setState({ playing: true })
+  initialCode = () => levels[this.state.level].initialCode
+
+  handleResetClick = () => {
+    this.setState(() => ({
+      playing: false,
+      done: false,
+      failed: null,
+      code: this.initialCode()
+    }))
+    this.refs.code.reloadProps(this.initialCode())
+  }
 
   render() {
     const { playing, level, code, failed } = this.state
     const description = levels[level].instructions.join('<br/> <br/>')
-    const initialCode = levels[level].initialCode
+    const initialCode = this.initialCode()
     const lineStart = levels[level].lineStart
 
     return (

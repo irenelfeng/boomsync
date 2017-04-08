@@ -27,6 +27,7 @@
   flex-direction: column;
   justify-content: flex-end;
   z-index: 10;
+  box-shadow: 2px 2px 2px black;
 }
 
 .Right-sidebar {

@@ -43,11 +43,10 @@ export default class Play extends Component {
 
     // define throwBoomerang
     const throwBoomerang = (fn) => {
-      if (this.state.boomerangs.length == this.state.birds.length) {
-        console.log("oops")
-        this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${this.state.birds.length} boomerangs`})
-        return
+      if (queuedBoomerangs == 2) {
+        return this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${2} boomerangs at once`})
       }
+
       queuedBoomerangs++
       this.state.boomerangs.push(generateBoomerang(queuedBoomerangs - 1))
       this.forceUpdate()

@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import boomerang from './boomerang.svg'
-import bird from './bird.svg'
 import './Play.css'
 
-let birdSpeed = 1
-let boomSpeed = 1
-let boomReturnTime = 1500
+let birdSpeed = .5
+let boomSpeed = .5
+let boomReturnTime = 3000
 let tickInterval = 5
 
 const dist = ([x1, y1], [x2, y2]) => Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
@@ -27,24 +26,43 @@ export default class Play extends Component {
     )
   }
 
+  componentWillUnmount () {
+    clearInterval(this.tickIntervalId)
+    this.tickIntervalId = null
+  }
+
   componentDidMount () {
+    let queuedBoomerangs = 0
+
     // define throwBoomerang
     const throwBoomerang = (fn) => {
+      queuedBoomerangs++
       this.state.boomerangs.push(generateBoomerang())
       this.forceUpdate()
 
-      setTimeout(() => fn && fn(null, {}), boomReturnTime)
+      console.log(queuedBoomerangs)
+
+      setTimeout(() => {
+        fn && fn(null, {})
+        queuedBoomerangs--
+
+        if (queuedBoomerangs == 0) this.props.succeed()
+      }, boomReturnTime)
     }
 
-    eval(`throwBoomerang((err, boom) => {
-      throwBoomerang()
-    })`)
-    this.tickIntervalId = setInterval(this.tick, tickInterval)
+    try {
+      eval(`throwBoomerang((err, boom) => {
+        throwBoomerang()
+      })`)
+    } catch (err) {
+      this.props.fail(err)
+    }
 
-    setTimeout(() => clearInterval(this.tickIntervalId), 5000)
+    this.tickIntervalId = setInterval(this.tick, tickInterval)
   }
 
   tick = () => {
+    console.log('ticking')
     // check for crossed birds
     const birdsCrossed = this.state.birds.filter(b => b[0] < -300) // TODO
     // check for collisions
@@ -57,8 +75,6 @@ export default class Play extends Component {
     // Check if game is over
     if (birdsCrossed.length > 0) {
       this.props.fail()
-    } else if (birdsDead.length == this.state.birds) {
-      this.props.succeed()
     }
 
     // Update bird position
@@ -94,7 +110,7 @@ export default class Play extends Component {
     return (
       <div className='play'>
         {birds.map((b, idx) => (
-          <img src={bird} className='bird' key={b} style={{
+          <img src='/birdie_300.png' className='bird' key={b} style={{
               transform: `translate(${formatCoords(b, 50)})`
             }}
           />

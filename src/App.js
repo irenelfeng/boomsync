@@ -25,15 +25,17 @@ export default class App extends Component {
   succeed = () => {
     this.setState(() => ({
       failed: false,
-      done: true
-    }));
+      done: true,
+      playing: false,
+    }))
   }
 
-  failed = (err) => {
+  fail = (err) => {
     this.setState(() => ({
       failed: err,
-      done: true
-    }));
+      done: true,
+      playing: false
+    }))
   }
 
   play = () => this.setState({ playing: true })
@@ -60,7 +62,7 @@ export default class App extends Component {
         </div>
         <div className="Right-sidebar">
           { playing
-            ? <Play {...{level: levels[level], code, failed: this.failed, succeed: this.succeed}} />
+            ? <Play {...{level: levels[level], code, fail: this.fail, succeed: this.succeed}} />
             : <Preview {...{level}} />
           }
         </div>

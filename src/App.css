@@ -16,6 +16,7 @@
   height: 50%;
   text-align: left;
   overflow: scroll;
+  padding: 10px;
 }
 
 .Left-sidebar {

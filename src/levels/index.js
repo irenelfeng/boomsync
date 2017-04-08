@@ -1,13 +1,13 @@
 const levels = [
   {
     "level": 0,
-    "initialCode": "// write your code here",
+    "initialCode": "chill(500, () => \n // write your COO here \n );",
     "instructions": [`Welcome to boomsync, where we will learn how to
     program asynchronously in Javascript.
     We are avid bird hunters and need your help. `,
     `You have the <code>throwBoomerang()</code> function which throws your boomerang.
     It can take in a function as an (optional) parameter, executing after the boomerang is thrown.`,
-    `But nevermind this for now: just type in 
+    `But nevermind this for now: just type in
     <code>throwBoomerang()</code> in the code editor and knock down a bird!`
     ],
     "events": [
@@ -21,13 +21,13 @@ const levels = [
     "level": 1,
     "initialCode": "chill(500, () => \n // write your code here \n );",
     "instructions": [`For this level, we need to throw a boomerang to kill a bird in <b>1000</b> ms.`,
-    `You now have another function to call besides <code>throwBoomerang()</code>. 
+    `You now have another function to call besides <code>throwBoomerang()</code>.
     <code>chill()</code>
     takes in two parameters: the first is how long you wait in milliseconds.
     The second parameter should be a function that will be executed after
     we chill for that number of milliseconds. This is called a <i> callback </i> function.`,
-    `The optional parameter we can give to <code>throwBoomerang()</code> is also a callback. 
-    Callbacks are everywhere in asynchronous javascript`, 
+    `The optional parameter we can give to <code>throwBoomerang()</code> is also a callback.
+    Callbacks are everywhere in asynchronous javascript`,
     `In the editor below, chilling for <b>1000</b> ms and then
     call <code>throwBoomerang()</code> in the callback.`
     ],

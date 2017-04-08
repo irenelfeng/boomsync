@@ -64,8 +64,7 @@ export default class Play extends Component {
 
     try {
       const stuff = eval(this.props.code)
-      console.log(this.props.code)
-      console.log(stuff)
+
     } catch (err) {
       this.props.fail(err)
     }
@@ -85,6 +84,7 @@ export default class Play extends Component {
 
     // Check if game is over
     if (birdsCrossed.length > 0) {
+      // TODO: match to need expected birds dead
       this.props.fail()
     }
 

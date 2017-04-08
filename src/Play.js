@@ -14,6 +14,13 @@ export default class Play extends Component {
     boomerangs: []
   }
 
+  failed = false
+
+  fail = (err) => {
+    this.failed = true
+    this.props.fail(err)
+  }
+
   tickIntervalId = null
 
   componentWillMount () {
@@ -43,7 +50,11 @@ export default class Play extends Component {
         fn && fn(null, {})
         queuedBoomerangs--
 
-        if (queuedBoomerangs == 0) this.props.succeed()
+        if (queuedBoomerangs == 0) {
+          if (!this.failed)
+            this.props.succeed()
+        }
+
       }, boomReturnTime)
     }
 

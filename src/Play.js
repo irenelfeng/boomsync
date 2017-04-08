@@ -5,7 +5,7 @@ import './Play.css'
 let birdSpeed = .25
 let boomSpeed = .5
 let boomReturnTime = 5000
-let tickInterval = 5
+let tickInterval = 100
 
 const dist = ([x1, y1], [x2, y2]) => Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
 
@@ -109,16 +109,14 @@ export default class Play extends Component {
     return (
       <div className='play'>
         {birds.map((b, idx) => (
-          <img src='/birdie.svg' className='bird' key={b} style={{
-              transform: `translate(${formatCoords(b, 50)})`
-            }}
-          />
+          <div className='smooth' style={{transform: `translate(${formatCoords(b, 50)})`}}>
+            <img src='/birdie.svg' className='bird' key={b}/>
+          </div>
         ))}
         {boomerangs.map((b, idx) => (
-          <img src={boomerang} className='boomerang' key={`${idx}-${b.coords}`} style={{
-              transform: `translate(${formatCoords(b.coords, 40)})`,
-            }}
-          />
+          <div className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
+            <img src={boomerang} className='boomerang' key={`${idx}-${b.coords}`} />
+          </div>
         ))}
       </div>
     )

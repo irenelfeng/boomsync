@@ -16,15 +16,15 @@ export default class App extends Component {
     level: 0,   // this is just an index
     isSubmitted: false,
     failed: null,
-    done: false
+    readyForNext: false
   }
 
-  handleClick = () => this.state.done
+  handleClick = () => this.state.readyForNext
     ? this.setState(prevState => ({
         playing: false,
         isSubmitted: false,
         code: null,
-        done: false,
+        readyForNext: false,
         level: prevState.level + 1
       }))
     : this.setState(prevState => ({
@@ -36,7 +36,7 @@ export default class App extends Component {
   handleResetClick = () => { // TODO
     this.setState(() => ({
       playing: false,
-      done: false,
+      readyForNext: false,
       failed: null
     }))
   }
@@ -45,15 +45,15 @@ export default class App extends Component {
     this.setState(() => ({
       level: page - 1,
       playing: false,
-      failed: null
+      failed: null,
     }))
+    this.refs.code.reloadProps(this.initialCode(page - 1))
   }
 
   succeed = () => {
     this.setState(() => ({
-      failed: false,
-      done: true,
       playing: false,
+      readyForNext: true
     }))
   }
 
@@ -65,22 +65,22 @@ export default class App extends Component {
   }
 
   play = () => this.setState({ playing: true })
-  initialCode = () => levels[this.state.level].initialCode
+  initialCode = (level) => levels[level].initialCode
 
   handleResetClick = () => {
     this.setState(() => ({
       playing: false,
-      done: false,
+      readyForNext: false,
       failed: null,
-      code: this.initialCode()
+      code: this.initialCode(this.state.level)
     }))
-    this.refs.code.reloadProps(this.initialCode())
+    this.refs.code.reloadProps(this.initialCode(this.state.level))
   }
 
   render() {
     const { playing, level, code, failed } = this.state
     const description = levels[level].instructions.join('<br/> <br/>')
-    const initialCode = this.initialCode()
+    const initialCode = this.initialCode(level)
     const lineStart = levels[level].lineStart
 
     return (
@@ -114,11 +114,11 @@ export default class App extends Component {
                 </Button>
                 <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
                   {this.state.isSubmitted
-                    ? this.state.playing
-                      ? this.state.failed
-                        ? 'Try Again'
-                        : 'Running'
-                      : 'Next'
+                    ? this.state.readyForNext
+                      ? this.state.playing
+                        ? 'Running'
+                        : 'Next'
+                      : 'Try Again'
                     : 'Submit'
                   }
                 </Button>

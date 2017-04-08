@@ -8,10 +8,21 @@
   height: 100%;
 }
 
+.Game-description{
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+}
+
 .Left-sidebar {
   flex: 1;
   height: 100%;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   z-index: 10;
 }
 

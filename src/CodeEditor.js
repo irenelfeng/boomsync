@@ -39,7 +39,6 @@ export default class CodeEditor extends Component {
         cursorStart={ this.props.lineStart }
         height="50%"
         width="100%"
-        ref='editor'
       />
     );
   }

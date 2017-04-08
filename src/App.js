@@ -10,7 +10,9 @@ export default class App extends Component {
   state = {
     playing: false,
     level: 0,   // this is just an index
-    isSubmitted: false
+    isSubmitted: false,
+    failed: null,
+    done: false
   }
 
   handleClick = () => {
@@ -18,6 +20,20 @@ export default class App extends Component {
       playing: true,
       isSubmitted: !prevState.isSubmitted
     }))
+  }
+
+  succeed = () => {
+    this.setState(() => ({
+      failed: false,
+      done: true
+    }));
+  }
+
+  failed = (err) => {
+    this.setState(() => ({
+      failed: err,
+      done: true
+    }));
   }
 
   play = () => this.setState({playing: true})
@@ -43,7 +59,7 @@ export default class App extends Component {
         </div>
         <div className="Right-sidebar">
           {playing
-            ? <Play {...{level: levels[level], code}} />
+            ? <Play {...{level: levels[level], code, failed: this.failed, succeed: this.succeed}} />
             : <Preview {...{level}} />
           }
         </div>

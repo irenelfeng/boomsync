@@ -51,9 +51,7 @@ export default class Play extends Component {
     }
 
     try {
-      eval(`throwBoomerang((err, boom) => {
-        throwBoomerang()
-      })`)
+      const stuff = eval(this.props.code)
     } catch (err) {
       this.props.fail(err)
     }
@@ -62,7 +60,6 @@ export default class Play extends Component {
   }
 
   tick = () => {
-    console.log('ticking')
     // check for crossed birds
     const birdsCrossed = this.state.birds.filter(b => b[0] < -300) // TODO
     // check for collisions
@@ -104,7 +101,6 @@ export default class Play extends Component {
   }
 
   render () {
-    const { code, level } = this.props
     const { birds, boomerangs } = this.state
 
     return (

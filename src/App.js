@@ -41,9 +41,10 @@ export default class App extends Component {
   }
 
   fail = (err) => {
+    console.log(err)
+  
     this.setState(() => ({
       failed: err,
-      done: true,
       playing: false
     }))
   }

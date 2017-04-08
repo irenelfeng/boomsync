@@ -3,8 +3,6 @@ import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/solarized_dark'
 import 'brace/ext/language_tools'
-import 'brace/keybinding/vim'
-
 
 export default class CodeEditor extends Component {
   state = {
@@ -12,14 +10,14 @@ export default class CodeEditor extends Component {
   }
 
   componentWillMount () {
-    this.state.value = this.props.initialcode
+    this.state.value = this.props.initialCode
   }
 
   getContents = () => this.state.value
 
   reloadProps = () => {
     this.setState({
-      value: this.props.initialcode,
+      value: this.props.initialCode,
     })
   }
 
@@ -30,8 +28,6 @@ export default class CodeEditor extends Component {
       <AceEditor
         mode="javascript"
         theme="solarized_dark"
-        keyboardHandler="vim"
-        height="8em"
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
@@ -40,6 +36,7 @@ export default class CodeEditor extends Component {
         }}
         value={this.state.value}
         onChange={this.handleChange}
+        cursorStart={ this.props.lineStart }
         height="50%"
         width="100%"
         ref='editor'

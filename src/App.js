@@ -16,13 +16,18 @@ export default class App extends Component {
     done: false
   }
 
-  handleClick = () => {
-    this.setState(prevState => ({
-      playing: true,
-      isSubmitted: !prevState.isSubmitted,
-      code: this.refs.code.getContents()
-    }))
-  }
+  handleClick = () => this.state.done
+    ? this.setState(prevState => ({
+        playing: false,
+        isSubmitted: false,
+        code: null,
+        level: prevState.level++
+      }))
+    : this.setState(prevState => ({
+        playing: true,
+        isSubmitted: true,
+        code: this.refs.code.getContents()
+      }))
 
   handleResetClick = () => { // TODO
     this.setState(() => ({
@@ -42,7 +47,7 @@ export default class App extends Component {
 
   fail = (err) => {
     console.log(err)
-  
+
     this.setState(() => ({
       failed: err,
       playing: false
@@ -56,7 +61,6 @@ export default class App extends Component {
     const description = '<p>'+levels[level].instructions.join('</p><p>')+'</p>'
     const initialCode = levels[level].initialCode
     const lineStart = levels[level].lineStart
-    // console.log(initialCode)
 
     return (
       <div className="App">

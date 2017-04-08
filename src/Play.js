@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import boomerang from './boomerang.svg'
 import './Play.css'
 
-let birdSpeed = .5
+let birdSpeed = .25
 let boomSpeed = .5
-let boomReturnTime = 3000
+let boomReturnTime = 5000
 let tickInterval = 5
 
 const dist = ([x1, y1], [x2, y2]) => Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)

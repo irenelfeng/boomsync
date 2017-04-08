@@ -1,7 +1,7 @@
 const levels = [
   {
     "level": 1, 
-    "instructions": "Welcome to boomsync, where we will learn how to program asynchronously in Javscript."
+    "instructions": "Welcome to boomsync, where we will learn how to program asynchronously in Javscript.",
     "events": {
       "type": 'bird', 
       "time": 500

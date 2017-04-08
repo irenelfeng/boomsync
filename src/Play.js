@@ -43,6 +43,11 @@ export default class Play extends Component {
 
     // define throwBoomerang
     const throwBoomerang = (fn) => {
+      if (this.state.boomerangs.length == this.state.birds.length) {
+        console.log("oops")
+        this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${this.state.birds.length} boomerangs`})
+        return
+      }
       queuedBoomerangs++
       this.state.boomerangs.push(generateBoomerang())
       this.forceUpdate()
@@ -75,7 +80,7 @@ export default class Play extends Component {
 
   tick = () => {
     // check for crossed birds
-    const birdsCrossed = this.state.birds.filter(b => b[0] < -300) // TODO
+    const birdsCrossed = this.state.birds.filter(b => b[0] < -300)
     // check for collisions
     const birdsDead = this.state.birds.map(b =>
       this.state.boomerangs.filter(({coords}) => dist(b, coords) < 50).length > 0
@@ -85,7 +90,7 @@ export default class Play extends Component {
 
     // Check if game is over
     if (birdsCrossed.length > 0) {
-      // TODO: match to need expected birds dead
+      // TODO: match to expected birds dead
       this.fail()
     }
 

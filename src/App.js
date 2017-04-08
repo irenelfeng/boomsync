@@ -5,6 +5,7 @@ import Play from './Play'
 import Preview from './Preview'
 import levels from './levels'
 import CodeEditor from './CodeEditor'
+import LevelIndicator from './LevelIndicator'
 
 export default class App extends Component {
   state = {
@@ -19,6 +20,14 @@ export default class App extends Component {
     this.setState(prevState => ({
       playing: true,
       isSubmitted: !prevState.isSubmitted
+    }))
+  }
+
+  handleResetClick = () => { // TODO
+    this.setState(() => ({
+      playing: false,
+      done: false,
+      failed: null
     }))
   }
 
@@ -46,9 +55,13 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="Left-sidebar">
+          <LevelIndicator />
           <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
           </div>
           <CodeEditor {...{initialcode}}/>
+          <Button type="danger" lonClick={this.handleResetClick}>
+            Reset
+          </Button>
           <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
             {this.state.isSubmitted
               ? this.state.playing

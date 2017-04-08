@@ -1,8 +1,7 @@
 const levels = [
   {
     "level": 0,
-    "lineStart": 2,
-    "initialCode": "chill(500, () => \n // write your code here \n );",
+    "initialcode": "chill(500, () => \n // write your code here \n );",
     "instructions": [`Welcome to boomsync, where we will learn how to
     program asynchronously in Javascript.
     For this level, we need to throw a boomerang to kill a bird in <b>1000</b> ms.`,
@@ -24,11 +23,11 @@ const levels = [
   },
   {
     "level": 1,
-    "instructions": [`Great job! However, this code did not take full advantage of
-    the power of asynchronization. We could have just executed the <code>chill()</code>
+    "instructions": [`Great job! However, this code did not take full advantage of 
+    the power of asynchronization. We could have just executed the <code>chill()</code> 
     function and then the <code>throwBoomerang()</code> function synchronously without callbacks.`,
     `In this level, let's throw two boomerangs to kill two birds.
-    We don't have to wait for the first boomerang to come back to throw the second boomerang.
+    We don't have to wait for the first boomerang to come back to throw the second boomerang.  
     Our code is <i>non-blocking</i>, which maximizes efficiency!`,
     `In the editor below, immediately throw the first boomerang.
     Also chill for <b>200</b>ms, and in the callback, throw another boomerang.`
@@ -37,11 +36,34 @@ const levels = [
       {
         "type": 'bird',
         "time": 500
-      },
+      }, 
       {
         "type": 'bird',
         "time": 700
-      },
+      }, 
+
+    ]
+  },
+  {
+    "level": 2,
+    "instructions": [`Great job! However, this code did not take full advantage of 
+    the power of asynchronization. We could have just executed the <code>chill()</code> 
+    function and then the <code>throwBoomerang()</code> function synchronously without callbacks.`,
+    `In this level, let's throw two boomerangs to kill two birds.
+    We don't have to wait for the first boomerang to come back to throw the second boomerang.  
+    Our code is <i>non-blocking</i>, which maximizes efficiency!`,
+    `In the editor below, immediately throw the first boomerang.
+    Also chill for <b>200</b>ms, and in the callback, throw another boomerang.`
+    ],
+    "events": [
+      {
+        "type": 'bird',
+        "time": 500
+      }, 
+      {
+        "type": 'bird',
+        "time": 1400
+      }, 
 
     ]
   }

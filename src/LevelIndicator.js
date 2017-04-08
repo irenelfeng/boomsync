@@ -8,7 +8,7 @@ function onChange(pageNumber) {
 export default class LevelIndicator extends Component {
   render() {
     return (
-      <Pagination showQuickJumper defaultCurrent={1} pageSize={1} total={7} onChange={onChange} />
+      <Pagination showQuickJumper current={this.props.level} pageSize={1} total={7} onChange={onChange} />
     );
   }
 }

@@ -7,6 +7,8 @@ import levels from './levels'
 import CodeEditor from './CodeEditor'
 import LevelIndicator from './LevelIndicator'
 
+const print = (s) => (console.log(s), s)
+
 export default class App extends Component {
   state = {
     playing: false,
@@ -16,12 +18,13 @@ export default class App extends Component {
     done: false
   }
 
-  handleClick = () => this.state.done
+  handleClick = () => print(this.state.done)
     ? this.setState(prevState => ({
         playing: false,
         isSubmitted: false,
         code: null,
-        level: prevState.level++
+        done: false,
+        level: prevState.level + 1
       }))
     : this.setState(prevState => ({
         playing: true,
@@ -46,8 +49,6 @@ export default class App extends Component {
   }
 
   fail = (err) => {
-    console.log(err)
-
     this.setState(() => ({
       failed: err,
       playing: false
@@ -58,6 +59,7 @@ export default class App extends Component {
 
   render() {
     const { playing, level, code } = this.state
+    console.log(level)
     const description = '<p>'+levels[level].instructions.join('</p><p>')+'</p>'
     const initialCode = levels[level].initialCode
     const lineStart = levels[level].lineStart
@@ -65,7 +67,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="Left-sidebar">
-          <LevelIndicator />
+          <LevelIndicator level={level + 1} />
           <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
           </div>
           <CodeEditor {...{initialCode, lineStart}} ref='code' />
@@ -75,7 +77,9 @@ export default class App extends Component {
           <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
             {this.state.isSubmitted
               ? this.state.playing
-                ? 'Running'
+                ? this.state.failed
+                  ? 'Try Again'
+                  : 'Running'
                 : 'Next'
               : 'Submit'
             }

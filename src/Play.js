@@ -8,7 +8,6 @@ let boomReturnTime = 5000
 let tickInterval = 5
 
 const dist = ([x1, y1], [x2, y2]) => Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
-const print = (s) => (console.log(s), s)
 
 export default class Play extends Component {
   state = {
@@ -39,8 +38,6 @@ export default class Play extends Component {
       queuedBoomerangs++
       this.state.boomerangs.push(generateBoomerang())
       this.forceUpdate()
-
-      console.log(queuedBoomerangs)
 
       setTimeout(() => {
         fn && fn(null, {})

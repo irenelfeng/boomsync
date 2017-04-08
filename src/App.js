@@ -88,7 +88,10 @@ export default class App extends Component {
       <div className="App">
         <div className="Left-sidebar">
           <Layout>
-            <Header>
+            <Header style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+              }}
+            >
               <span className="logo">LOGO</span>
               <LevelIndicator changePage={this.changePage} level={level + 1} />
             </Header>

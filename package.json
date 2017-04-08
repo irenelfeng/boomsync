@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "draft-js": "^0.10.0",
+    "draft-js-code": "^0.2.0",
+    "draft-js-prism": "^1.0.3",
     "react": "^15.5.3",
     "react-dom": "^15.5.3"
   },

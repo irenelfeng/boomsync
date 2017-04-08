@@ -1,7 +1,20 @@
 .App {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.Left-sidebar {
+  flex: 1;
+}
+
+.Right-sidebar {
+  flex: 1;
+  align-self: center;
+}
+
+/* deleted logo from App.js and logo.svg */
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -23,6 +36,7 @@
   to { transform: rotate(360deg); }
 }
 
+/* Editor */
 .RichEditor-root {
   background: #fff;
   border: 1px solid #ddd;
@@ -61,11 +75,12 @@
   padding: 10px 20px;
 }
 
-.RichEditor-editor .public-DraftStyleDefault-pre {
+.RichEditor-editor .public-DraftStyleDefault-pre > pre {
   background-color: rgba(0, 0, 0, 0.05);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 16px;
   padding: 20px;
+  margin-bottom: 20px;
 }
 
 .RichEditor-controls {
@@ -86,3 +101,5 @@
 .RichEditor-activeButton {
   color: #5890ff;
 }
+
+/* need prism and editor css to enable syntax highlighting? */

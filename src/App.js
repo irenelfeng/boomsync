@@ -10,10 +10,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p className="Game-description">
-          Welcome to <code>boomsync</code>!
-        </p>
-        <CodeEditor />
+        <div className="Left-sidebar">
+          <p className="Game-description">
+            Welcome to <code>boomsync</code>!
+          </p>
+          <CodeEditor />
+        </div>
+        <div className="Right-sidebar">
+          <p>Game goes here</p>
+        </div>
       </div>
     );
   }

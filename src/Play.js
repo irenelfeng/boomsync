@@ -4,7 +4,7 @@ import './Play.css'
 
 let birdSpeed = .25
 let boomSpeed = .5
-let boomReturnTime = 5000
+let boomReturnTime = 3000
 let tickInterval = 50
 
 const dist = ([x1, y1], [x2, y2]) => Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
@@ -29,7 +29,7 @@ export default class Play extends Component {
     boomSpeed = (playCoords[1] / boomReturnTime) * 2
 
     this.state.birds = this.props.level.events.map(({type, time}) =>
-      [(playCoords[0] / 2) + (time * birdSpeed), 50]
+      [100 + (time * birdSpeed), 50]
     )
   }
 

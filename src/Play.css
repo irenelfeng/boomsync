@@ -13,6 +13,11 @@
   height: 100px;
 }
 
+.smooth-rotate {
+  transition: transform 50ms linear;
+  -webkit-transition: transform 50ms linear;
+}
+
 .play {
   height: 100%;
   text-align: left;

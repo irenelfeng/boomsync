@@ -100,13 +100,13 @@ export default class Play extends Component {
       wayBack || coords[1] < 50
         ? ({
             coords: [coords[0], coords[1] + boomSpeed * tickInterval],
-            rotation: rotation + 1,      // TODO
+            rotation: rotation + tickInterval,      // TODO
             flightAngle: flightAngle + 1,// TODO
             wayBack: true
           })
         : ({
             coords: [coords[0], coords[1] - boomSpeed * tickInterval],
-            rotation: rotation + 1,      // TODO
+            rotation: rotation + tickInterval,      // TODO
             flightAngle: flightAngle + 1,// TODO
             wayBack: false
           })
@@ -127,7 +127,8 @@ export default class Play extends Component {
         ))}
         {boomerangs.map((b, idx) => (
           <div className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
-            <img src={boomerang} className='boomerang' key={`${idx}-${b.coords}`} />
+            <img src='/boomerang_redBoom.svg' className='smooth-rotate boomerang' key={`${idx}-${b.coords}`}
+              style={{transform: `rotate(${b.rotation}deg)`}} />
           </div>
         ))}
       </div>

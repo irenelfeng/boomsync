@@ -17,8 +17,9 @@ export default class Play extends Component {
   failed = false
 
   fail = (err) => {
+    clearInterval(this.tickIntervalId)
     this.failed = true
-    this.props.fail(err)
+    this.props.fail(err || {name: 'Failure', message: 'A bird escaped!'})
   }
 
   tickIntervalId = null
@@ -66,7 +67,7 @@ export default class Play extends Component {
       const stuff = eval(this.props.code)
 
     } catch (err) {
-      this.props.fail(err)
+      this.fail(err)
     }
 
     this.tickIntervalId = setInterval(this.tick, tickInterval)
@@ -85,7 +86,7 @@ export default class Play extends Component {
     // Check if game is over
     if (birdsCrossed.length > 0) {
       // TODO: match to need expected birds dead
-      this.props.fail()
+      this.fail()
     }
 
     // Update bird position

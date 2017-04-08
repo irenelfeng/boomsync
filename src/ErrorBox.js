@@ -21,6 +21,7 @@ export default class CodeEditor extends Component {
         height="10%"
         style={{minHeight:"50px"}}
         width="100%"
+        readOnly={true}
       />
     );
   }

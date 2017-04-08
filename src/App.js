@@ -41,6 +41,15 @@ export default class App extends Component {
     }))
   }
 
+  changePage = (page) => {
+    console.log("CHANGE PAGE BEING CALLED")
+    this.setState(() => ({
+      level: page - 1,
+      playing: false,
+      failed: null
+    }))
+  }
+
   succeed = () => {
     this.setState(() => ({
       failed: false,
@@ -67,7 +76,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <div className="Left-sidebar">
-          <LevelIndicator level={level + 1} />
+          <LevelIndicator changePage={this.changePage} level={level + 1} />
           <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
           </div>
           <CodeEditor {...{initialCode, lineStart}} ref='code' />

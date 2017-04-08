@@ -5,6 +5,7 @@ import Play from './Play'
 import Preview from './Preview'
 import levels from './levels'
 import CodeEditor from './CodeEditor'
+import ErrorBox from './ErrorBox'
 import LevelIndicator from './LevelIndicator'
 
 const { Header, Content } = Layout
@@ -18,7 +19,7 @@ export default class App extends Component {
     done: false
   }
 
-  handleClick = () => print(this.state.done)
+  handleClick = () => this.state.done
     ? this.setState(prevState => ({
         playing: false,
         isSubmitted: false,
@@ -58,8 +59,7 @@ export default class App extends Component {
   play = () => this.setState({ playing: true })
 
   render() {
-    const { playing, level, code } = this.state
-    console.log(level)
+    const { playing, level, code, failed } = this.state
     const description = levels[level].instructions.join('<br/> <br/>')
     const initialCode = levels[level].initialCode
     const lineStart = levels[level].lineStart
@@ -82,6 +82,8 @@ export default class App extends Component {
               <CodeEditor {...{initialCode, lineStart}} ref='code'
                 style={{flex: 1, minHeight: '200px'}}
               />
+              <p>Errors:</p>
+              <ErrorBox {...{failed}} />
               <div style={{
                   display: 'flex',
                   margin: 5,

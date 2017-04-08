@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 300 300" style="enable-background:new 0 0 300 300;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E4BEBD;}
+	.st1{fill:#CEC1A3;}
+	.st2{fill:url(#backWing_1_);}
+	.st3{fill:url(#body_1_);}
+	.st4{fill:#FBCCCC;}
+	.st5{fill:#EADEBB;}
+	.st6{fill:url(#frontWing_1_);}
+	.st7{fill:#DA8483;}
+	.st8{fill:#FFDE8D;}
+	.st9{fill:#FFFFFF;}
+</style>
+<path id="backFeet" class="st0" d="M183,236.9l8.9,5c0,0,0.5,7.9,10.5,16.7c9.7,8.6,13.2,9.8,17.7,8.9s6.9-7,6.9-7
+	s-6.5,2.2-10.2-0.2c-3.4-2.2-12.5-7.5-13.3-11c-0.8-3.5,0.3-6.6,0.3-6.6s2.8-1.2,7.4,0.8c4.6,2,3.2,5.3,3.2,5.3s3.5-5.6,1.2-7.7
+	c-2.4-2.1-9.1-7.8-14.8-6.9c-5.7,0.9-7.3,1.7-7.3,1.7l-9.6-6.4L183,236.9z"/>
+<path id="backLeg" class="st1" d="M161,231.7c0,0,3.1,3.2,8.9,4.4c5.8,1.2,13.6,1.5,13.6,1.5l3.1-4.7c0,0-7.2-6.4-12.8-7.3
+	C168.1,224.7,161,231.7,161,231.7z"/>
+<linearGradient id="backWing_1_" gradientUnits="userSpaceOnUse" x1="78.8427" y1="147.6882" x2="201.8296" y2="25.62" gradientTransform="matrix(0.7045 -0.7098 0.7098 0.7045 -62.0802 151.1563)">
+	<stop  offset="1.198948e-03" style="stop-color:#CEC1A3"/>
+	<stop  offset="7.332816e-02" style="stop-color:#C2AB9A"/>
+	<stop  offset="0.1889" style="stop-color:#B4908F"/>
+	<stop  offset="0.3125" style="stop-color:#AA7C87"/>
+	<stop  offset="0.4449" style="stop-color:#A36D81"/>
+	<stop  offset="0.59" style="stop-color:#9E637D"/>
+	<stop  offset="0.7577" style="stop-color:#9B5C7A"/>
+	<stop  offset="1" style="stop-color:#9A5A7A"/>
+</linearGradient>
+<path id="backWing" class="st2" d="M93.9,197.9c-16.5-12.6-36.4-56.1-37.7-63c-1.3-6.9-1-28.4,4.6-52.6S88.1,26,88.1,26
+	s27.6,27.2,32.9,45.4c8,27.6-4.7,48.7-4.7,48.7s15.4,14.7,20.5,28.8c5.3,14.6,5.5,26,2.3,32.9S102.4,203.8,93.9,197.9z"/>
+<linearGradient id="body_1_" gradientUnits="userSpaceOnUse" x1="166.3594" y1="238.3611" x2="166.3594" y2="173.5949">
+	<stop  offset="1.198948e-03" style="stop-color:#CEC1A3"/>
+	<stop  offset="2.093196e-03" style="stop-color:#CEC1A3"/>
+	<stop  offset="0.2027" style="stop-color:#E2D5B3"/>
+	<stop  offset="0.42" style="stop-color:#F1E4BF"/>
+	<stop  offset="0.6661" style="stop-color:#FCEDC7"/>
+	<stop  offset="1" style="stop-color:#FFF1C9"/>
+</linearGradient>
+<path id="body" class="st3" d="M48.4,203.8c0,0-5.6-32.6,67.9-30c56.9,2,58.8,17.3,77.1,23.1c18.4,5.8,87.2-9.8,87.2-9.8
+	s8.6,6.1,0,17.7c-8.6,11.6-32.1,18.7-32.1,18.7s-38.2-6.7-48.6-5.9s-34.9,16.1-58.8,18.9C116.3,239.3,48.4,244.8,48.4,203.8z"/>
+<path id="frontFeet" class="st4" d="M193.6,235.1l8.6,5.4c0,0,0.1,7.9,9.6,17.3c9.3,9.1,12.7,10.4,17.2,9.8c4.5-0.6,7.3-6.6,7.3-6.6
+	s-6.6,1.8-10.2-0.8c-3.3-2.4-12.1-8.2-12.7-11.7c-0.6-3.5,0.7-6.6,0.7-6.6s2.8-1.1,7.3,1.2s2.9,5.4,2.9,5.4s3.8-5.4,1.6-7.7
+	s-8.6-8.3-14.4-7.7c-5.8,0.6-7.4,1.3-7.4,1.3l-9.3-6.9L193.6,235.1z"/>
+<path id="frontLeg" class="st5" d="M172.3,227c0,0,3,4.4,9.3,6.6c6.3,2.2,14.9,3.6,14.9,3.6l4.1-5.6c0,0-7.1-9-13.2-10.8
+	C181.3,219,172.3,227,172.3,227z"/>
+<linearGradient id="frontWing_1_" gradientUnits="userSpaceOnUse" x1="177.1613" y1="199.2366" x2="177.1613" y2="52.9737">
+	<stop  offset="1.198948e-03" style="stop-color:#FFF2CA"/>
+	<stop  offset="6.281341e-02" style="stop-color:#E8D2BA"/>
+	<stop  offset="0.1593" style="stop-color:#D0ADA6"/>
+	<stop  offset="0.2626" style="stop-color:#BD9196"/>
+	<stop  offset="0.372" style="stop-color:#B07C8B"/>
+	<stop  offset="0.4899" style="stop-color:#A66D83"/>
+	<stop  offset="0.6201" style="stop-color:#9F637E"/>
+	<stop  offset="0.7723" style="stop-color:#9C5C7B"/>
+	<stop  offset="1" style="stop-color:#9A5A7A"/>
+</linearGradient>
+<path id="frontWing" class="st6" d="M118.3,178.2c-2.7-20.6,14.2-65.3,18.1-71.1c3.9-5.8,19.4-20.6,40.5-33.8S236.3,53,236.3,53
+	s0.1,38.7-9.1,55.3c-13.9,25.2-37.9,30.9-37.9,30.9s0.4,21.2-6.1,34.9c-6.7,14.1-14.6,22.2-21.7,24.8S120.1,188.4,118.3,178.2z"/>
+<path id="head" class="st7" d="M92.6,173.7c7.3,0,24.2,3.2,23.7,30.8c-0.5,27.8-21.5,32.2-21.5,32.2s-12.7,4.7-36.2-8.7
+	s-30.2-15.4-30.8-28.8C27.1,185.8,85.3,173.7,92.6,173.7z"/>
+<path id="beak" class="st8" d="M35.8,211.7c0,0,2.6-1.2,2.3-6.1c-0.4-4.9-4.1-6.4-7.2-6.4s-8.3,0.7-11.7,6.4
+	c-3.4,5.7,6.4,13.3,6.4,13.3s-5.9-9.5,2.2-8.3L35.8,211.7z"/>
+<g id="eye_1_">
+	<circle id="eye" cx="47.4" cy="198.5" r="5.8"/>
+	<circle id="eyeShine" class="st9" cx="46.2" cy="196.6" r="1.9"/>
+</g>
+</svg>

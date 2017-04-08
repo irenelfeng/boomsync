@@ -10,7 +10,9 @@ export default class App extends Component {
   state = {
     playing: false,
     level: 0,   // this is just an index
-    isSubmitted: false
+    isSubmitted: false,
+    failed: null,
+    done: false
   }
 
   handleClick = () => {
@@ -20,18 +22,33 @@ export default class App extends Component {
     }))
   }
 
-  play = () => this.setState({playing: true})
+  succeed = () => {
+    this.setState(() => ({
+      failed: false,
+      done: true
+    }));
+  }
+
+  failed = (err) => {
+    this.setState(() => ({
+      failed: err,
+      done: true
+    }));
+  }
+
+  play = () => this.setState({ playing: true })
 
   render() {
     const { playing, level, code } = this.state
+    const description = '<p>'+levels[level].instructions.join('</p><p>')+'</p>'
+    const initialcode = levels[level].initialcode
 
     return (
       <div className="App">
         <div className="Left-sidebar">
-          <p className="Game-description">
-            Welcome to <code>boomsync</code>!
-          </p>
-          <CodeEditor />
+          <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
+          </div>
+          <CodeEditor {...{initialcode}}/>
           <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
             {this.state.isSubmitted
               ? this.state.playing
@@ -42,8 +59,8 @@ export default class App extends Component {
           </Button>
         </div>
         <div className="Right-sidebar">
-          {playing
-            ? <Play {...{level: levels[level], code}} />
+          { playing
+            ? <Play {...{level: levels[level], code, failed: this.failed, succeed: this.succeed}} />
             : <Preview {...{level}} />
           }
         </div>

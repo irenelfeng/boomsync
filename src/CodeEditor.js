@@ -28,6 +28,7 @@ export default class CodeEditor extends Component {
         }}
         maxLines="14"
         minLines="14"
+        value={ this.props.initialcode }
       />
     );
   }

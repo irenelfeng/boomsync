@@ -4,7 +4,7 @@ import './Play.css'
 
 let birdSpeed = .25
 let boomSpeed = .5
-let boomReturnTime = 5000
+let boomReturnTime = 3000
 let tickInterval = 50
 
 const dist = ([x1, y1], [x2, y2]) => Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
@@ -29,7 +29,7 @@ export default class Play extends Component {
     boomSpeed = (playCoords[1] / boomReturnTime) * 2
 
     this.state.birds = this.props.level.events.map(({type, time}) =>
-      [(playCoords[0] / 2) + (time * birdSpeed), 50]
+      [100 + (time * birdSpeed), 50]
     )
   }
 
@@ -43,8 +43,12 @@ export default class Play extends Component {
 
     // define throwBoomerang
     const throwBoomerang = (fn) => {
+      if (queuedBoomerangs == 2) {
+        return this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${2} boomerangs at once`})
+      }
+
       queuedBoomerangs++
-      this.state.boomerangs.push(generateBoomerang())
+      this.state.boomerangs.push(generateBoomerang(queuedBoomerangs - 1))
       this.forceUpdate()
 
       setTimeout(() => {
@@ -75,7 +79,7 @@ export default class Play extends Component {
 
   tick = () => {
     // check for crossed birds
-    const birdsCrossed = this.state.birds.filter(b => b[0] < -300) // TODO
+    const birdsCrossed = this.state.birds.filter(b => b[0] < -300)
     // check for collisions
     const birdsDead = this.state.birds.map(b =>
       this.state.boomerangs.filter(({coords}) => dist(b, coords) < 50).length > 0
@@ -85,7 +89,7 @@ export default class Play extends Component {
 
     // Check if game is over
     if (birdsCrossed.length > 0) {
-      // TODO: match to need expected birds dead
+      // TODO: match to expected birds dead
       this.fail()
     }
 
@@ -100,13 +104,13 @@ export default class Play extends Component {
       wayBack || coords[1] < 50
         ? ({
             coords: [coords[0], coords[1] + boomSpeed * tickInterval],
-            rotation: rotation + 1,      // TODO
+            rotation: rotation + tickInterval,      // TODO
             flightAngle: flightAngle + 1,// TODO
             wayBack: true
           })
         : ({
             coords: [coords[0], coords[1] - boomSpeed * tickInterval],
-            rotation: rotation + 1,      // TODO
+            rotation: rotation + tickInterval,      // TODO
             flightAngle: flightAngle + 1,// TODO
             wayBack: false
           })
@@ -127,7 +131,9 @@ export default class Play extends Component {
         ))}
         {boomerangs.map((b, idx) => (
           <div className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
-            <img src={boomerang} className='boomerang' key={`${idx}-${b.coords}`} />
+            <img src={['/boomerang_redBoom.svg', 'boomerang_tapedBoom.svg'][idx % 2]}
+              className='smooth-rotate boomerang' key={`${idx}-${b.coords}`}
+              style={{transform: `rotate(${b.rotation}deg)`}} />
           </div>
         ))}
       </div>
@@ -135,12 +141,12 @@ export default class Play extends Component {
   }
 }
 
-function generateBoomerang () {
+function generateBoomerang (idx) {
   if (!playCoords) setPlayCoords()
 
   return {
     coords: [0, playCoords[1]],
-    rotation: 0,
+    rotation: 45 * idx,
     flightAngle: -45,
     wayBack: false
   }

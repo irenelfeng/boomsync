@@ -44,7 +44,7 @@ export default class Play extends Component {
     // define throwBoomerang
     const throwBoomerang = (fn) => {
       queuedBoomerangs++
-      this.state.boomerangs.push(generateBoomerang())
+      this.state.boomerangs.push(generateBoomerang(queuedBoomerangs - 1))
       this.forceUpdate()
 
       setTimeout(() => {
@@ -127,7 +127,8 @@ export default class Play extends Component {
         ))}
         {boomerangs.map((b, idx) => (
           <div className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
-            <img src='/boomerang_redBoom.svg' className='smooth-rotate boomerang' key={`${idx}-${b.coords}`}
+            <img src={['/boomerang_redBoom.svg', 'boomerang_tapedBoom.svg'][idx % 2]}
+              className='smooth-rotate boomerang' key={`${idx}-${b.coords}`}
               style={{transform: `rotate(${b.rotation}deg)`}} />
           </div>
         ))}
@@ -136,12 +137,12 @@ export default class Play extends Component {
   }
 }
 
-function generateBoomerang () {
+function generateBoomerang (idx) {
   if (!playCoords) setPlayCoords()
 
   return {
     coords: [0, playCoords[1]],
-    rotation: 0,
+    rotation: 45 * idx,
     flightAngle: -45,
     wayBack: false
   }

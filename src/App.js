@@ -92,7 +92,7 @@ export default class App extends Component {
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center'
               }}
             >
-              <span className="logo">LOGO</span>
+              <img src="./logo_wide.png" height="90%" />
               <LevelIndicator changePage={this.changePage} level={level + 1} />
             </Header>
             <Content style={{

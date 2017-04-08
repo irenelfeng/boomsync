@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import './App.css';
-import CodeEditor from './CodeEditor';
+import React, { Component } from 'react'
+import './App.css'
+import CodeEditor from './CodeEditor'
+import Play from './Play'
+import Preview from './Preview'
 
 class App extends Component {
   state = {
@@ -8,6 +10,8 @@ class App extends Component {
   }
 
   render() {
+    const { playing, level, code } = this.state
+
     return (
       <div className="App">
         <div className="Left-sidebar">
@@ -17,7 +21,10 @@ class App extends Component {
           <CodeEditor />
         </div>
         <div className="Right-sidebar">
-          <p>Game goes here</p>
+          {playing
+            ? <Play {...{level, code}} />
+            : <Preview {...{level}} />
+          }
         </div>
       </div>
     );

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import boomerang from './svg/boomerang'
+import boomerang from './boomerang.svg'
+import bird from './bird.svg'
 import './App.css'
 
 const birdSpeed = 1
@@ -7,7 +8,7 @@ const boomSpeed = 1
 const boomReturnTime = 1000
 const tickInterval = 1
 
-class App extends Component {
+export default class Play extends Component {
   state = {
     boomerangs: []
   }
@@ -29,7 +30,7 @@ class App extends Component {
       setTimeout(() => fn(null, {}), boomReturnTime)
     }
 
-    eval(code)
+    eval(this.props.code)
   }
 
   tick = () => {
@@ -86,11 +87,9 @@ class App extends Component {
   }
 }
 
-export default Play
-
 function generateBoomerang () {
   return {
-    coords: [0, 0]
+    coords: [0, 0],
     rotation: 0,
     flightAngle: -45
   }

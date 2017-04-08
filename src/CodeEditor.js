@@ -7,11 +7,23 @@ import 'brace/keybinding/vim'
 
 
 export default class CodeEditor extends Component {
-  reloadProps() {
-    this.setState({
-      value: 'I am changed',
-    });
+  state = {
+    value: ''
   }
+
+  componentWillMount () {
+    this.state.value = this.props.initialcode
+  }
+
+  getContents = () => this.state.value
+
+  reloadProps = () => {
+    this.setState({
+      value: this.props.initialcode,
+    })
+  }
+
+  handleChange = (value) => this.setState({ value })
 
   render() {
     return (
@@ -26,9 +38,11 @@ export default class CodeEditor extends Component {
           tabSize: 4,
           fontSize: 14,
         }}
-        value={ this.props.initialcode }
+        value={this.state.value}
+        onChange={this.handleChange}
         height="50%"
         width="100%"
+        ref='editor'
       />
     );
   }

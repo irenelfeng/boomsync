@@ -19,7 +19,8 @@ export default class App extends Component {
   handleClick = () => {
     this.setState(prevState => ({
       playing: true,
-      isSubmitted: !prevState.isSubmitted
+      isSubmitted: !prevState.isSubmitted,
+      code: this.refs.code.getContents()
     }))
   }
 
@@ -60,7 +61,7 @@ export default class App extends Component {
           <LevelIndicator />
           <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
           </div>
-          <CodeEditor {...{initialcode}}/>
+          <CodeEditor {...{initialcode}} ref='code' />
           <Button type="danger" lonClick={this.handleResetClick}>
             Reset
           </Button>

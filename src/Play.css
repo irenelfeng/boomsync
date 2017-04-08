@@ -1,7 +1,12 @@
 .bird {
-  position: fixed;
+  position: absolute;
 }
 
 .boomerang {
-  position: fixed;
+  position: absolute;
+}
+
+.play {
+  height: 100%;
+  text-align: left;
 }

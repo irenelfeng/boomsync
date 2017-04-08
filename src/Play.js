@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import boomerang from './boomerang.svg'
 import bird from './bird.svg'
-import './App.css'
+import './Play.css'
 
 const birdSpeed = 1
 const boomSpeed = 1
 const boomReturnTime = 1000
-const tickInterval = 1
+const tickInterval = 5
+
+const print = (s) => (console.log(s), s)
 
 export default class Play extends Component {
   state = {
@@ -16,8 +18,10 @@ export default class Play extends Component {
   tickIntervalId = null
 
   componentWillMount () {
+    if (!playCoords) setPlayCoords()
+
     this.state.birds = this.props.level.events.map(({type, time}) =>
-      [(-1) * time * birdSpeed, 300]
+      [(playCoords[0] / 2) + time * birdSpeed, 50]
     )
   }
 
@@ -27,13 +31,19 @@ export default class Play extends Component {
       this.state.boomerangs.push(generateBoomerang())
       this.forceUpdate()
 
-      setTimeout(() => fn(null, {}), boomReturnTime)
+      setTimeout(() => fn && fn(null, {}), boomReturnTime)
     }
 
-    eval(this.props.code)
+    eval(`throwBoomerang((err, boom) => {
+      throwBoomerang()
+    })`)
+    this.tickIntervalId = setInterval(this.tick, tickInterval)
+
+    setTimeout(() => clearInterval(this.tickIntervalId), 5000)
   }
 
   tick = () => {
+
     // check for crossed birds
     const birdsCrossed = this.state.birds.filter(b => false) // TODO
     // check for collisions
@@ -55,11 +65,21 @@ export default class Play extends Component {
     )
 
     // Update boomerang position
-    this.state.boomerangs = this.state.boomerangs.map(({coords, rotation, flightAngle}) => ({
-      coords: coords,              // TODO
-      rotation: rotation + 1,      // TODO
-      flightAngle: flightAngle + 1 // TODO
-    }))
+    this.state.boomerangs = this.state.boomerangs.map(({coords, rotation, flightAngle, wayBack}) =>
+      wayBack || coords[1] < 50
+        ? ({
+            coords: [coords[0], coords[1] + boomSpeed * tickInterval],
+            rotation: rotation + 1,      // TODO
+            flightAngle: flightAngle + 1,// TODO
+            wayBack: true
+          })
+        : ({
+            coords: [coords[0], coords[1] - boomSpeed * tickInterval],
+            rotation: rotation + 1,      // TODO
+            flightAngle: flightAngle + 1,// TODO
+            wayBack: false
+          })
+    )
 
     this.forceUpdate()
   }
@@ -70,15 +90,15 @@ export default class Play extends Component {
 
     return (
       <div className='play'>
-        {birds.map(b => (
-          <img src={bird} className='bird' style={{
-              transform: `translate()`
+        {birds.map((b, idx) => (
+          <img src={bird} className='bird' key={b} style={{
+              transform: `translate(${formatCoords(b, 50)})`
             }}
           />
         ))}
-        {boomerangs.map(b => (
-          <img src={bird} className='boomerang' style={{
-              transform: `translate() rotate(${b.rotation})`,
+        {boomerangs.map((b, idx) => (
+          <img src={boomerang} className='boomerang' key={`${idx}-${b.coords}`} style={{
+              transform: `translate(${formatCoords(b.coords, 40)})`,
             }}
           />
         ))}
@@ -88,9 +108,25 @@ export default class Play extends Component {
 }
 
 function generateBoomerang () {
+  if (!playCoords) setPlayCoords()
+
   return {
-    coords: [0, 0],
+    coords: [0, playCoords[1]],
     rotation: 0,
-    flightAngle: -45
+    flightAngle: -45,
+    wayBack: false
   }
+}
+
+let playCoords
+function setPlayCoords () {
+  playCoords = [
+    document.querySelector('.Right-sidebar').offsetWidth,
+    document.querySelector('.Right-sidebar').offsetHeight,
+  ]
+}
+
+function formatCoords (coords, radius) {
+  if (!playCoords) setPlayCoords()
+  return `${Math.floor(coords[0] + (playCoords[0] / 2) - radius)}px, ${coords[1] - radius}px`
 }

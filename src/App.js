@@ -3,20 +3,36 @@ import { Button } from 'antd';
 import './App.css'
 import Play from './Play'
 import Preview from './Preview'
+import levels from './levels'
 import CodeEditor from './CodeEditor'
-import levels from './levels/levels.js'
 
-class App extends Component {
+export default class App extends Component {
   state = {
     playing: false,
-    level: 1,
-    isSubmitted: false
+    level: 0,   // this is just an index
+    isSubmitted: false,
+    failed: null,
+    done: false
   }
 
   handleClick = () => {
     this.setState(prevState => ({
       playing: true,
       isSubmitted: !prevState.isSubmitted
+    }))
+  }
+
+  succeed = () => {
+    this.setState(() => ({
+      failed: false,
+      done: true
+    }));
+  }
+
+  failed = (err) => {
+    this.setState(() => ({
+      failed: err,
+      done: true
     }));
   }
 
@@ -43,14 +59,12 @@ class App extends Component {
           </Button>
         </div>
         <div className="Right-sidebar">
-          {playing
-            ? <Play {...{level, code}} />
-            : <Preview {...{level, code}} />
+          { playing
+            ? <Play {...{level: levels[level], code, failed: this.failed, succeed: this.succeed}} />
+            : <Preview {...{level}} />
           }
         </div>
       </div>
     );
   }
 }
-
-export default App;

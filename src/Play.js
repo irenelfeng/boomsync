@@ -47,8 +47,14 @@ export default class Play extends Component {
       }, boomReturnTime)
     }
 
+    const chill = (ms, fn) => {
+      setTimeout(() => fn && fn(null, {}), ms)
+    }
+
     try {
       const stuff = eval(this.props.code)
+      console.log(this.props.code)
+      console.log(stuff)
     } catch (err) {
       this.props.fail(err)
     }

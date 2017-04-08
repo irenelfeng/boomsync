@@ -36,7 +36,6 @@ export default class CodeEditor extends Component {
         }}
         value={this.state.value}
         onChange={this.handleChange}
-        cursorStart={ this.props.lineStart }
         height="50%"
         width="100%"
       />

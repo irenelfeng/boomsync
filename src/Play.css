@@ -4,8 +4,8 @@
 }
 
 .smooth {
-  transition: transform 100ms linear;
-  -webkit-transition: transform 100ms linear;
+  transition: transform 50ms linear;
+  -webkit-transition: transform 50ms linear;
 }
 
 .boomerang {

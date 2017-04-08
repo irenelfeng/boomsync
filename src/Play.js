@@ -5,7 +5,7 @@ import './Play.css'
 let birdSpeed = .25
 let boomSpeed = .5
 let boomReturnTime = 5000
-let tickInterval = 100
+let tickInterval = 50
 
 const dist = ([x1, y1], [x2, y2]) => Math.sqrt((x1 - x2)**2 + (y1 - y2)**2)
 

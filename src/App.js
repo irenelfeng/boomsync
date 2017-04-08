@@ -1,18 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CodeEditor from './CodeEditor';
 
 class App extends Component {
+  state = {
+    playing: false
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+        <div className="Left-sidebar">
+          <p className="Game-description">
+            Welcome to <code>boomsync</code>!
+          </p>
+          <CodeEditor />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="Right-sidebar">
+          <p>Game goes here</p>
+        </div>
       </div>
     );
   }

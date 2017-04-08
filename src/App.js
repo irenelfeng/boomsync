@@ -9,7 +9,7 @@ import CodeEditor from './CodeEditor'
 export default class App extends Component {
   state = {
     playing: false,
-    level: 0  // this is just an index
+    level: 0,   // this is just an index
     isSubmitted: false
   }
 

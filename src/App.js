@@ -5,7 +5,6 @@ import 'brace/mode/javascript';
 import 'brace/theme/solarized_dark';
 import 'brace/ext/language_tools';
 import './App.css'
-import CodeEditor from './CodeEditor'
 import Play from './Play'
 import Preview from './Preview'
 

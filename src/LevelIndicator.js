@@ -5,7 +5,6 @@ import { Pagination } from 'antd';
 export default class LevelIndicator extends Component {
 
   handleChange = (page, pageSize) => {
-    console.log(`changing to ${page}`)
     this.props.changePage(page)
   }
 

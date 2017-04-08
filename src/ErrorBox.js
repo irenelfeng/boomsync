@@ -19,6 +19,7 @@ export default class CodeEditor extends Component {
         showGutter={false}
         value={err ? `${err.name}: ${err.message}` : 'No errors so far!'}
         height="10%"
+        style={{minHeight:"50px"}}
         width="100%"
       />
     );

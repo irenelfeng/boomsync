@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'antd';
+import { Button, Layout } from 'antd';
 import './App.css'
 import Play from './Play'
 import Preview from './Preview'
@@ -8,7 +8,7 @@ import CodeEditor from './CodeEditor'
 import ErrorBox from './ErrorBox'
 import LevelIndicator from './LevelIndicator'
 
-const print = (s) => (console.log(s), s)
+const { Header, Content } = Layout
 
 export default class App extends Component {
   state = {
@@ -19,7 +19,7 @@ export default class App extends Component {
     done: false
   }
 
-  handleClick = () => print(this.state.done)
+  handleClick = () => this.state.done
     ? this.setState(prevState => ({
         playing: false,
         isSubmitted: false,
@@ -69,32 +69,52 @@ export default class App extends Component {
 
   render() {
     const { playing, level, code, failed } = this.state
-    const description = '<p>'+levels[level].instructions.join('</p><p>')+'</p>'
+    const description = levels[level].instructions.join('<br/> <br/>')
     const initialCode = levels[level].initialCode
     const lineStart = levels[level].lineStart
 
     return (
       <div className="App">
         <div className="Left-sidebar">
-          <LevelIndicator changePage={this.changePage} level={level + 1} />
-          <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
-          </div>
-          <CodeEditor {...{initialCode, lineStart}} ref='code' />
-          <p>Errors:</p>
-          <ErrorBox {...{failed}} />
-          <Button type="danger" onClick={this.handleResetClick}>
-            Reset
-          </Button>
-          <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
-            {this.state.isSubmitted
-              ? this.state.playing
-                ? this.state.failed
-                  ? 'Try Again'
-                  : 'Running'
-                : 'Next'
-              : 'Submit'
-            }
-          </Button>
+          <Layout>
+            <Header>
+              <LevelIndicator changePage={this.changePage} level={level + 1} />
+            </Header>
+            <Content style={{
+                display: 'flex',
+                flexDirection: 'column'
+              }}
+            >
+              <div className="Game-description">
+                <span dangerouslySetInnerHTML={{ __html: description }} />
+              </div>
+              <CodeEditor {...{initialCode, lineStart}} ref='code'
+                style={{flex: 1, minHeight: '200px'}}
+              />
+              <p>Errors:</p>
+              <ErrorBox {...{failed}} />
+              <div style={{
+                  display: 'flex',
+                  margin: 5,
+                  justifyContent: 'space-around'
+                }}
+              >
+                <Button type="danger" onClick={this.handleResetClick}>
+                  Reset
+                </Button>
+                <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
+                  {this.state.isSubmitted
+                    ? this.state.playing
+                      ? this.state.failed
+                        ? 'Try Again'
+                        : 'Running'
+                      : 'Next'
+                    : 'Submit'
+                  }
+                </Button>
+              </div>
+            </Content>
+          </Layout>
         </div>
         <div className="Right-sidebar">
           { playing

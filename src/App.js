@@ -7,10 +7,12 @@ import 'brace/ext/language_tools';
 import './App.css'
 import Play from './Play'
 import Preview from './Preview'
+import levels from './levels'
 
 class App extends Component {
   state = {
-    playing: false
+    playing: false,
+    level: 0  // this is just an index
   }
 
   play = () => this.setState({playing: true})
@@ -37,10 +39,13 @@ class App extends Component {
               showGutter: true
             }}
           />
+          <a onClick={this.play} >
+            Go!
+          </a>
         </div>
         <div className="Right-sidebar">
           {playing
-            ? <Play {...{level, code}} />
+            ? <Play {...{level: levels[level], code}} />
             : <Preview {...{level}} />
           }
         </div>

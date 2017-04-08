@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-import boomerang from './boomerang.svg'
-import './App.css'
+import './Play.css'
 
-export default class Preview extends Component {
-  render() {
-    const { code, level } = this.props
-
+export default class Play extends Component {
+  render () {
     return (
-      <div>
-        Game preview
+      <div className='play'>
       </div>
     )
   }

@@ -109,7 +109,7 @@ export default class Play extends Component {
     return (
       <div className='play'>
         {birds.map((b, idx) => (
-          <img src='/birdie_300.png' className='bird' key={b} style={{
+          <img src='/birdie.svg' className='bird' key={b} style={{
               transform: `translate(${formatCoords(b, 50)})`
             }}
           />

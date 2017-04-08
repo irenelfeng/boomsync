@@ -15,9 +15,9 @@ export default class CodeEditor extends Component {
 
   getContents = () => this.state.value
 
-  reloadProps = () => {
+  reloadProps = (code) => {
     this.setState({
-      value: this.props.initialCode,
+      value: code || this.props.initialCode,
     })
   }
 

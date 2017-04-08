@@ -33,14 +33,6 @@ export default class App extends Component {
         code: this.refs.code.getContents()
       }))
 
-  handleResetClick = () => { // TODO
-    this.setState(() => ({
-      playing: false,
-      done: false,
-      failed: null
-    }))
-  }
-
   succeed = () => {
     this.setState(() => ({
       failed: false,
@@ -57,11 +49,22 @@ export default class App extends Component {
   }
 
   play = () => this.setState({ playing: true })
+  initialCode = () => levels[this.state.level].initialCode
+
+  handleResetClick = () => {
+    this.setState(() => ({
+      playing: false,
+      done: false,
+      failed: null,
+      code: this.initialCode()
+    }))
+    this.refs.code.reloadProps(this.initialCode())
+  }
 
   render() {
     const { playing, level, code, failed } = this.state
     const description = levels[level].instructions.join('<br/> <br/>')
-    const initialCode = levels[level].initialCode
+    const initialCode = this.initialCode()
     const lineStart = levels[level].lineStart
 
     return (

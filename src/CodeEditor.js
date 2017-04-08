@@ -26,9 +26,9 @@ export default class CodeEditor extends Component {
           tabSize: 4,
           fontSize: 14,
         }}
-        maxLines="14"
-        minLines="14"
         value={ this.props.initialcode }
+        height="50%"
+        width="100%"
       />
     );
   }

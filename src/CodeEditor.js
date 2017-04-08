@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
-import 'brace/theme/solarized_dark'
+import 'brace/theme/solarized_light'
 import 'brace/ext/language_tools'
 
 export default class CodeEditor extends Component {
@@ -15,9 +15,9 @@ export default class CodeEditor extends Component {
 
   getContents = () => this.state.value
 
-  reloadProps = () => {
+  reloadProps = (code) => {
     this.setState({
-      value: this.props.initialCode,
+      value: code || this.props.initialCode,
     })
   }
 
@@ -27,7 +27,7 @@ export default class CodeEditor extends Component {
     return (
       <AceEditor
         mode="javascript"
-        theme="solarized_dark"
+        theme="solarized_light"
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,

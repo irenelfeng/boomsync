@@ -41,6 +41,14 @@ export default class App extends Component {
     }))
   }
 
+  changePage = (page) => {
+    this.setState(() => ({
+      level: page - 1,
+      playing: false,
+      failed: null
+    }))
+  }
+
   succeed = () => {
     this.setState(() => ({
       failed: false,
@@ -57,11 +65,22 @@ export default class App extends Component {
   }
 
   play = () => this.setState({ playing: true })
+  initialCode = () => levels[this.state.level].initialCode
+
+  handleResetClick = () => {
+    this.setState(() => ({
+      playing: false,
+      done: false,
+      failed: null,
+      code: this.initialCode()
+    }))
+    this.refs.code.reloadProps(this.initialCode())
+  }
 
   render() {
     const { playing, level, code, failed } = this.state
     const description = levels[level].instructions.join('<br/> <br/>')
-    const initialCode = levels[level].initialCode
+    const initialCode = this.initialCode()
     const lineStart = levels[level].lineStart
 
     return (
@@ -69,7 +88,7 @@ export default class App extends Component {
         <div className="Left-sidebar">
           <Layout>
             <Header>
-              <LevelIndicator level={level + 1} />
+              <LevelIndicator changePage={this.changePage} level={level + 1} />
             </Header>
             <Content style={{
                 display: 'flex',

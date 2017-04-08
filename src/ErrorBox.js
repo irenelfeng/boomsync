@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
-import 'brace/theme/terminal'
+import 'brace/theme/github'
 import 'brace/ext/language_tools'
 
 export default class CodeEditor extends Component {
@@ -11,7 +11,7 @@ export default class CodeEditor extends Component {
     return (
       <AceEditor
         mode="javascript"
-        theme="terminal"
+        theme="github"
         setOptions={{
           tabSize: 4,
           fontSize: 14,

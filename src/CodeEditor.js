@@ -19,15 +19,14 @@ export default class CodeEditor extends Component {
         mode="javascript"
         theme="solarized_dark"
         keyboardHandler="vim"
-        height="8em"
+        height="50%"
+        width="100%"
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
           tabSize: 4,
           fontSize: 14,
         }}
-        maxLines="14"
-        minLines="14"
         value={ this.props.initialcode }
       />
     );

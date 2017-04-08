@@ -64,7 +64,7 @@ export default class Play extends Component {
     this.forceUpdate()
   }
 
-  render() {
+  render () {
     const { code, level } = this.props
     const { birds, boomerangs } = this.state
 

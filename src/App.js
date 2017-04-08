@@ -9,6 +9,8 @@ class App extends Component {
     playing: false
   }
 
+  play = () => this.setState({playing: true})
+
   render() {
     const { playing, level, code } = this.state
 
@@ -19,6 +21,9 @@ class App extends Component {
             Welcome to <code>boomsync</code>!
           </p>
           <CodeEditor />
+          <a onClick={this.play} >
+            Go!
+          </a>
         </div>
         <div className="Right-sidebar">
           {playing

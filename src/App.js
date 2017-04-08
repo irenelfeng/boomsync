@@ -53,7 +53,9 @@ export default class App extends Component {
   render() {
     const { playing, level, code } = this.state
     const description = '<p>'+levels[level].instructions.join('</p><p>')+'</p>'
-    const initialcode = levels[level].initialcode
+    const initialCode = levels[level].initialCode
+    const lineStart = levels[level].lineStart
+    // console.log(initialCode)
 
     return (
       <div className="App">
@@ -61,8 +63,8 @@ export default class App extends Component {
           <LevelIndicator />
           <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
           </div>
-          <CodeEditor {...{initialcode}} ref='code' />
-          <Button type="danger" lonClick={this.handleResetClick}>
+          <CodeEditor {...{initialCode, lineStart}} ref='code' />
+          <Button type="danger" onClick={this.handleResetClick}>
             Reset
           </Button>
           <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>

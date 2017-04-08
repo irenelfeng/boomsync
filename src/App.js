@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import AceEditor from 'react-ace';
+import brace from 'brace';
+import 'brace/mode/javascript';
+import 'brace/theme/solarized_dark';
+import 'brace/ext/language_tools';
 import './App.css'
 import CodeEditor from './CodeEditor'
 import Play from './Play'
@@ -20,10 +25,19 @@ class App extends Component {
           <p className="Game-description">
             Welcome to <code>boomsync</code>!
           </p>
-          <CodeEditor />
-          <a onClick={this.play} >
-            Go!
-          </a>
+          <AceEditor
+            mode="javascript"
+            theme="solarized_dark"
+            name="code editor"
+            height="6em"
+            setOptions={{
+              enableBasicAutocompletion: true,
+              enableLiveAutocompletion: false,
+              tabSize: 4,
+              fontSize: 14,
+              showGutter: true
+            }}
+          />
         </div>
         <div className="Right-sidebar">
           {playing

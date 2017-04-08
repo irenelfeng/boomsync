@@ -5,6 +5,7 @@ import Play from './Play'
 import Preview from './Preview'
 import levels from './levels'
 import CodeEditor from './CodeEditor'
+import ErrorBox from './ErrorBox'
 import LevelIndicator from './LevelIndicator'
 
 const print = (s) => (console.log(s), s)
@@ -58,8 +59,7 @@ export default class App extends Component {
   play = () => this.setState({ playing: true })
 
   render() {
-    const { playing, level, code } = this.state
-    console.log(level)
+    const { playing, level, code, failed } = this.state
     const description = '<p>'+levels[level].instructions.join('</p><p>')+'</p>'
     const initialCode = levels[level].initialCode
     const lineStart = levels[level].lineStart
@@ -71,6 +71,8 @@ export default class App extends Component {
           <div className="Game-description" dangerouslySetInnerHTML={{ __html: description }}>
           </div>
           <CodeEditor {...{initialCode, lineStart}} ref='code' />
+          <p>Errors:</p>
+          <ErrorBox {...{failed}} />
           <Button type="danger" onClick={this.handleResetClick}>
             Reset
           </Button>

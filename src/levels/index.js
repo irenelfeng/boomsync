@@ -7,7 +7,7 @@ const levels = [
       program asynchronously in Javascript by throwing boomerangs at birds.
       We are avid bird hunters and need your help. `,
       `To throw a boomerang, call <code>throwBoomerang()</code>.
-      You can optionally include a callback paramter <code>throwBoomerang(callback)</code>,
+      You can optionally include a callback parameter <code>throwBoomerang(callback)</code>,
       which will be executed once the boomerang returns.`,
       `For now, just give <code>throwBoomerang()</code> a try in the code editor
       below and click 'Submit' to knock down a bird!`
@@ -71,7 +71,7 @@ const levels = [
     "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow().then(() => throwBoomerang())",
     "instructions": [
       `Awesome job! Next: Promises. A Promise is an object representing some asynchronous
-      operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled (rejected),
+      operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled,
       it resolves (optionally with a particular value). If a promise fails (rejects), it
       is rejected with an error.`,
       `In this example, you can use a library called <code>bluebird</code> to convert

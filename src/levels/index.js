@@ -7,7 +7,7 @@ const levels = [
       program asynchronously in Javascript by throwing boomerangs at birds.
       We are avid bird hunters and need your help. `,
       `To throw a boomerang, call <code>throwBoomerang()</code>.
-      You can optionally include a callback paramter <code>throwBoomerang(callback)</code>,
+      You can optionally include a callback parameter <code>throwBoomerang(callback)</code>,
       which will be executed once the boomerang returns.`,
       `For now, just give <code>throwBoomerang()</code> a try in the code editor
       below and click 'Submit' to knock down a bird!`

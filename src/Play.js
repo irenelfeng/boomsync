@@ -57,7 +57,7 @@ export default class Play extends Component {
         queuedBoomerangs--
 
         if (queuedBoomerangs == 0) {
-          if (this.state.birds.length > 0) {
+          if (this.state.birds.filter(b => !b.dead).length > 0) {
             return this.fail({name: 'Failure', message: `A bird escaped!`})
           } else if (!this.failed) {
             return this.props.succeed()

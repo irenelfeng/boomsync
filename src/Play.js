@@ -57,8 +57,11 @@ export default class Play extends Component {
         queuedBoomerangs--
 
         if (queuedBoomerangs == 0) {
-          if (!this.failed)
+          if (this.state.birds.length > 0) {
+            return this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${2} boomerangs at once`})
+          } else if (!this.failed) {
             this.props.succeed()
+          }
         }
 
       }, boomReturnTime)

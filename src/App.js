@@ -25,12 +25,14 @@ export default class App extends Component {
         isSubmitted: false,
         code: null,
         readyForNext: false,
-        level: prevState.level + 1
+        level: prevState.level + 1,
+        failed: null
       }))
     : this.setState(prevState => ({
         playing: true,
         isSubmitted: true,
-        code: this.refs.code.getContents()
+        code: this.refs.code.getContents(),
+        failed: null
       }))
 
   handleResetClick = () => { // TODO

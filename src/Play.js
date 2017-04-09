@@ -83,7 +83,7 @@ export default class Play extends Component {
 
   tick = () => {
     // check for crossed birds
-    const birdsCrossed = this.state.birds.filter(b => b[0] < -300)
+    const birdsCrossed = this.state.birds.filter(b => b.coords[0] < -300)
     // check for collisions
     const birdsDead = this.state.birds.map(b => b.dead
       ? true
@@ -93,6 +93,7 @@ export default class Play extends Component {
     const boomerangsReturned = this.state.boomerangs.map(b => false) // TODO
 
     // Check if game is over
+    console.log(birdsCrossed)
     if (birdsCrossed.length > 0) {
       this.fail()
     }

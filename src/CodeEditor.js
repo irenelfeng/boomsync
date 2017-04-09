@@ -23,6 +23,11 @@ export default class CodeEditor extends Component {
 
   handleChange = (value) => this.setState({ value })
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.initialCode != this.props.initialCode)
+      this.reloadProps(nextProps.initialCode)
+  }
+
   render() {
     return (
       <AceEditor

@@ -5,6 +5,10 @@
   background-color: #76a49a;
 }
 
+.ant-layout-footer {
+  background-color: #bde5ec;
+}
+
 .ant-pagination-item, .ant-pagination-prev, .ant-pagination-next {
   background-color: #bde5ec;
   border: 1px solid #a1abe9;

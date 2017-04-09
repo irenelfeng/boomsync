@@ -44,7 +44,7 @@ const levels = [
   },
   {
     "level": 2,
-    "initialCode": "",
+    "initialCode": "throwBoomerang() \n //write your code here",
     "instructions": [
       `Great job! However, this code did not take full advantage of the power of
       asynchronous execution, which is that while you're waiting for something

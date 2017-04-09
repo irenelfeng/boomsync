@@ -106,7 +106,7 @@ export default class App extends Component {
               <div className="Game-description">
                 <span dangerouslySetInnerHTML={{ __html: description }} />
               </div>
-              <CodeEditor {...{initialCode, lineStart}} ref='code'
+              <CodeEditor {...{initialCode, failed, playing}} ref='code'
                 style={{flex: 1, minHeight: '200px'}}
               />
               <p>Errors:</p>

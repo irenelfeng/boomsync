@@ -13,6 +13,14 @@ export default class CodeEditor extends Component {
     this.state.value = this.props.initialCode
   }
 
+  componentWillReceiveProps() {
+    debugger
+    if (this.props.failed || this.props.playing) {
+    } else {
+      this.state.value = this.props.initialCode
+    }
+  }
+
   getContents = () => this.state.value
 
   reloadProps = (code) => {
@@ -29,6 +37,7 @@ export default class CodeEditor extends Component {
   }
 
   render() {
+
     return (
       <AceEditor
         mode="javascript"

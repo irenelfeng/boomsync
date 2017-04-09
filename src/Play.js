@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import boomerang from './boomerang.svg'
-import bluebird from 'bluebird'
+import Bluebird from 'bluebird'
 import './Play.css'
 
 let birdSpeed = .25
@@ -58,9 +58,9 @@ export default class Play extends Component {
 
         if (queuedBoomerangs == 0) {
           if (this.state.birds.length > 0) {
-            return this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${2} boomerangs at once`})
+            return this.fail({name: 'Failure', message: `A bird escaped!`})
           } else if (!this.failed) {
-            this.props.succeed()
+            return this.props.succeed()
           }
         }
 
@@ -72,8 +72,8 @@ export default class Play extends Component {
     }
 
     try {
+      const bluebird = Bluebird
       const stuff = eval(this.props.code)
-
     } catch (err) {
       this.fail(err)
     }
@@ -129,8 +129,8 @@ export default class Play extends Component {
     return (
       <div className='play'>
         {birds.map((b, idx) => (
-          <div className='smooth' style={{transform: `translate(${formatCoords(b, 50)})`}}>
-            <img src='/birdie.svg' className='bird' key={b}/>
+          <div className='smooth' key={b} style={{transform: `translate(${formatCoords(b, 50)})`}}>
+            <img src='/birdie.svg' className='bird' />
           </div>
         ))}
         {boomerangs.map((b, idx) => (

@@ -137,7 +137,7 @@ export default class Play extends Component {
         ))}
 
         {birds.filter(b => b.dead).map((b, idx) => (
-          <audio src='collision.mp3' key={idx} />
+          <audio src='collision.mp3' key={idx} autoPlay='true' />
         ))}
 
         {boomerangs.map((b, idx) => (

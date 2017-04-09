@@ -92,7 +92,7 @@ export default class App extends Component {
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center'
               }}
             >
-              <span className="logo">LOGO</span>
+              <img src="./logo_wide.png" height="90%" />
               <LevelIndicator changePage={this.changePage} level={level + 1} />
             </Header>
             <Content style={{
@@ -112,7 +112,8 @@ export default class App extends Component {
               <div style={{
                   display: 'flex',
                   margin: 5,
-                  justifyContent: 'space-around'
+                  justifyContent: 'space-around',
+                  padding: 10
                 }}
               >
                 <Button type="danger" onClick={this.handleResetClick}>

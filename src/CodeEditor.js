@@ -32,7 +32,7 @@ export default class CodeEditor extends Component {
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
           tabSize: 4,
-          fontSize: 14,
+          fontSize: 16,
         }}
         value={this.state.value}
         onChange={this.handleChange}

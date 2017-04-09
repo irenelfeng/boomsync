@@ -21,7 +21,7 @@ const levels = [
   },
   {
     "level": 1,
-    "initialCode": "chill(500, () => \n // write your code here \n );",
+    "initialCode": "chill(1000, () => \n // write your code here \n );",
     "instructions": [
       `For this level, if you throw the boomerang right away you'll be too early.`,
       `You'll need to throw a boomerang in <b>1000</b> ms.`,
@@ -44,7 +44,7 @@ const levels = [
   },
   {
     "level": 2,
-    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow.then(() => throwBoomerang())",
+    "initialCode": "",
     "instructions": [
       `Great job! However, this code did not take full advantage of the power of
       asynchronous execution, which is that while you're waiting for something
@@ -67,6 +67,7 @@ const levels = [
   },
   {
     "level": 3,
+    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow.then(() => throwBoomerang())",
     "instructions": [
       `Awesome job! Next: Promises. A Promise is an object representing some asynchronous
       operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled (rejected),
@@ -86,7 +87,7 @@ const levels = [
       },
       {
         "type": 'bird',
-        "time": 2000
+        "time": 4000
       },
 
     ]

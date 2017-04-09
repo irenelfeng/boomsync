@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import boomerang from './boomerang.svg'
-import bluebird from 'bluebird'
+import Bluebird from 'bluebird'
 import './Play.css'
 
 let birdSpeed = .25
@@ -30,7 +30,7 @@ export default class Play extends Component {
     boomSpeed = (playCoords[1] / boomReturnTime) * 2
 
     this.state.birds = this.props.level.events.map(({type, time}) =>
-      [100 + (time * birdSpeed), 50]
+      ({ coords: [100 + (time * birdSpeed), 50], dead: false })
     )
   }
 
@@ -57,10 +57,10 @@ export default class Play extends Component {
         queuedBoomerangs--
 
         if (queuedBoomerangs == 0) {
-          if (this.state.birds.length > 0) {
-            return this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${2} boomerangs at once`})
+          if (this.state.birds.filter(b => !b.dead).length > 0) {
+            return this.fail({name: 'Failure', message: `A bird escaped!`})
           } else if (!this.failed) {
-            this.props.succeed()
+            return this.props.succeed()
           }
         }
 
@@ -72,8 +72,8 @@ export default class Play extends Component {
     }
 
     try {
+      const bluebird = Bluebird
       const stuff = eval(this.props.code)
-
     } catch (err) {
       this.fail(err)
     }
@@ -85,23 +85,23 @@ export default class Play extends Component {
     // check for crossed birds
     const birdsCrossed = this.state.birds.filter(b => b[0] < -300)
     // check for collisions
-    const birdsDead = this.state.birds.map(b =>
-      this.state.boomerangs.filter(({coords}) => dist(b, coords) < 50).length > 0
+    const birdsDead = this.state.birds.map(b => b.dead
+      ? true
+      : this.state.boomerangs.filter(({coords}) => dist(b.coords, coords) < 50).length > 0
     )
     // check for returned boomerangs
     const boomerangsReturned = this.state.boomerangs.map(b => false) // TODO
 
     // Check if game is over
     if (birdsCrossed.length > 0) {
-      // TODO: match to expected birds dead
       this.fail()
     }
 
     // Update bird position
-    this.state.birds = this.state.birds.map(([x,y], idx) => !birdsDead[idx]
-      ? [x - birdSpeed * tickInterval, y]
-      : undefined
-    ).filter(b => b)
+    this.state.birds = this.state.birds.map((b, idx) => !birdsDead[idx]
+      ? ({ coords: [b.coords[0] - birdSpeed * tickInterval, b.coords[1]], dead: b.dead })
+      : ({ coords: [b.coords[0] + 10, b.coords[1] + 10], dead: true })
+    )
 
     // Update boomerang position
     this.state.boomerangs = this.state.boomerangs.map(({coords, rotation, flightAngle, wayBack}) =>
@@ -129,10 +129,17 @@ export default class Play extends Component {
     return (
       <div className='play'>
         {birds.map((b, idx) => (
-          <div className='smooth' style={{transform: `translate(${formatCoords(b, 50)})`}}>
-            <img src='/birdie.svg' className='bird' key={b}/>
+          <div className='smooth' key={b.coords} style={{transform: `translate(${formatCoords(b.coords, 50)})`}}>
+            <img className='bird' src={!b.dead
+              ? '/birdie.svg'
+              : '/bird_falling.svg'} />
           </div>
         ))}
+
+        {birds.filter(b => b.dead).map((b, idx) => (
+          <audio src='collision.mp3' key={idx} autoPlay='true' />
+        ))}
+
         {boomerangs.map((b, idx) => (
           <div className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
             <img src={['/boomerang_redBoom.svg', 'boomerang_tapedBoom.svg'][idx % 2]}

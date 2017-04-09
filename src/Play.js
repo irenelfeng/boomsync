@@ -147,6 +147,13 @@ export default class Play extends Component {
               style={{transform: `rotate(${b.rotation}deg)`}} />
           </div>
         ))}
+
+        <img src='/back.svg' style={{
+            transform: `translate(${formatCoords([0, playCoords[1] - 50], 50)})`,
+            height: 100,
+            width: 100
+          }}
+        />
       </div>
     )
   }

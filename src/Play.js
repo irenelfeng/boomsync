@@ -93,7 +93,6 @@ export default class Play extends Component {
     const boomerangsReturned = this.state.boomerangs.map(b => false) // TODO
 
     // Check if game is over
-    console.log(birdsCrossed)
     if (birdsCrossed.length > 0) {
       this.fail()
     }

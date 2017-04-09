@@ -27,7 +27,8 @@ const levels = [
       `You'll need to throw a boomerang in <b>1000</b> ms.`,
       `We've provided you a second function called <code>chill</code>.
       <code>chill(waitTime, callback)</code>
-      takes in two parameters: the first is how to wait in milliseconds before the second function is called.`,
+      takes in two parameters: the first is how long to wait in milliseconds before
+      the function in the second parameter is called.`,
       `This is called a <i> callback </i> function.`,
       `The optional parameter we can give to <code>throwBoomerang()</code> is also a callback.
       Callbacks are everywhere in asynchronous Javascript`,
@@ -91,7 +92,32 @@ const levels = [
       },
 
     ]
+  },
+  {
+    "level": 4,
+    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow()\n \t.then(() => throwBoomerang())",
+    "instructions": [
+      `Whew! This is fun. But our boomerangs are taking a beating after killing so many birds. Our boomerangs might break at a random time!
+      We need to do something in case this happens, i.e. if the promise returned from <code>throwBoomerang()</code> rejects.`,
+      `Let's add to our promise: add a <code>.catch</code> function that will repair the boomerang if it breaks. `
+    ],
+    "events" : [
+      {
+        "type": 'brokenBird',
+        "time": 1000
+      }
+    ]
+  },
+  {
+    "level": 5,
+    "initialCode": "",
+    "instructions": [
+      `Birds are coming in pairs this time, so we need to throw two boomerangs at a time.`,
+      `Throw two pairs of boomerangs at a time: one `
+      `We love it! Love is also very unexpected, so now there are a random number of birds `
+    ]
   }
+
 ]
 
 

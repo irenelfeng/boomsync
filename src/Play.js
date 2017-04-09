@@ -30,7 +30,7 @@ export default class Play extends Component {
     boomSpeed = (playCoords[1] / boomReturnTime) * 2
 
     this.state.birds = this.props.level.events.map(({type, time}) =>
-      [100 + (time * birdSpeed), 50]
+      ({ coords: [100 + (time * birdSpeed), 50], dead: false })
     )
   }
 
@@ -85,23 +85,23 @@ export default class Play extends Component {
     // check for crossed birds
     const birdsCrossed = this.state.birds.filter(b => b[0] < -300)
     // check for collisions
-    const birdsDead = this.state.birds.map(b =>
-      this.state.boomerangs.filter(({coords}) => dist(b, coords) < 50).length > 0
+    const birdsDead = this.state.birds.map(b => b.dead
+      ? true
+      : this.state.boomerangs.filter(({coords}) => dist(b.coords, coords) < 50).length > 0
     )
     // check for returned boomerangs
     const boomerangsReturned = this.state.boomerangs.map(b => false) // TODO
 
     // Check if game is over
     if (birdsCrossed.length > 0) {
-      // TODO: match to expected birds dead
       this.fail()
     }
 
     // Update bird position
-    this.state.birds = this.state.birds.map(([x,y], idx) => !birdsDead[idx]
-      ? [x - birdSpeed * tickInterval, y]
-      : undefined
-    ).filter(b => b)
+    this.state.birds = this.state.birds.map((b, idx) => !birdsDead[idx]
+      ? ({ coords: [b.coords[0] - birdSpeed * tickInterval, b.coords[1]], dead: b.dead })
+      : ({ coords: [b.coords[0] + 10, b.coords[1] + 10], dead: true })
+    )
 
     // Update boomerang position
     this.state.boomerangs = this.state.boomerangs.map(({coords, rotation, flightAngle, wayBack}) =>
@@ -129,8 +129,10 @@ export default class Play extends Component {
     return (
       <div className='play'>
         {birds.map((b, idx) => (
-          <div className='smooth' key={b} style={{transform: `translate(${formatCoords(b, 50)})`}}>
-            <img src='/birdie.svg' className='bird' />
+          <div className='smooth' key={b.coords} style={{transform: `translate(${formatCoords(b.coords, 50)})`}}>
+            <img className='bird' src={!b.dead
+              ? '/birdie.svg'
+              : '/bird_falling.svg'} />
           </div>
         ))}
         {boomerangs.map((b, idx) => (

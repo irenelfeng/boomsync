@@ -70,7 +70,7 @@ const levels = [
     "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow().then(() => throwBoomerang())",
     "instructions": [
       `Awesome job! Next: Promises. A Promise is an object representing some asynchronous
-      operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled (rejected),
+      operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled (resolved),
       it resolves (optionally with a particular value). If a promise fails (rejects), it
       is rejected with an error.`,
       `In this example, you can use a library called <code>bluebird</code> to convert

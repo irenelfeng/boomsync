@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import boomerang from './boomerang.svg'
+import bluebird from 'bluebird'
 import './Play.css'
 
 let birdSpeed = .25

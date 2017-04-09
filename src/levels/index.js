@@ -1,7 +1,7 @@
 const levels = [
   {
     "level": 0,
-    "initialCode": "throwBoomerang()",
+    "initialCode": "// write your code here",
     "instructions": [
       `Welcome to boomsync, where we will learn how to
       program asynchronously in Javascript by throwing boomerangs at birds.
@@ -9,7 +9,7 @@ const levels = [
       `To throw a boomerang, call <code>throwBoomerang()</code>.
       You can optionally include a callback paramter <code>throwBoomerang(callback)</code>,
       which will be executed once the boomerang returns.`,
-      `For now, just give in <code>throwBoomerang()</code> a try in the code editor
+      `For now, just give <code>throwBoomerang()</code> a try in the code editor
       below and click 'Submit' to knock down a bird!`
     ],
     "events": [

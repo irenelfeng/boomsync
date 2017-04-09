@@ -131,9 +131,9 @@ export default class App extends Component {
                 </Button>
               </div>
             </Content>
-            <Footer>
+            <div className="foot">
               Game by <a href="http://irenefeng.com/">Irene Feng</a>, <a href="https://github.com/ben-pr-p">Ben Packer</a>, <a href="https://byrnehollander.com/">Byrne Hollander</a>, <a href="http://jennyseong.me/">Jenny Seong</a>
-            </Footer>
+            </div>
           </Layout>
         </div>
         <div className="Right-sidebar">

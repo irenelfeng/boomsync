@@ -112,7 +112,8 @@ export default class App extends Component {
               <div style={{
                   display: 'flex',
                   margin: 5,
-                  justifyContent: 'space-around'
+                  justifyContent: 'space-around',
+                  padding: 10
                 }}
               >
                 <Button type="danger" onClick={this.handleResetClick}>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import boomerang from './boomerang.svg'
+import bluebird from 'bluebird'
 import './Play.css'
 
 let birdSpeed = .25
@@ -56,8 +57,11 @@ export default class Play extends Component {
         queuedBoomerangs--
 
         if (queuedBoomerangs == 0) {
-          if (!this.failed)
+          if (this.state.birds.length > 0) {
+            return this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${2} boomerangs at once`})
+          } else if (!this.failed) {
             this.props.succeed()
+          }
         }
 
       }, boomReturnTime)

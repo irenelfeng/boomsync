@@ -135,6 +135,11 @@ export default class Play extends Component {
               : '/bird_falling.svg'} />
           </div>
         ))}
+
+        {birds.filter(b => b.dead).map((b, idx) => (
+          <audio src='collision.mp3' key={idx} />
+        ))}
+
         {boomerangs.map((b, idx) => (
           <div className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
             <img src={['/boomerang_redBoom.svg', 'boomerang_tapedBoom.svg'][idx % 2]}

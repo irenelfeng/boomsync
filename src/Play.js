@@ -53,8 +53,8 @@ export default class Play extends Component {
       this.forceUpdate()
 
       setTimeout(() => {
-        fn && fn(null, {})
         queuedBoomerangs--
+        fn && fn(null, {})
 
         if (queuedBoomerangs == 0) {
           if (this.state.birds.filter(b => !b.dead).length > 0) {
@@ -67,6 +67,7 @@ export default class Play extends Component {
       }, boomReturnTime)
     }
 
+    // chill function
     const chill = (ms, fn) => {
       setTimeout(() => fn && fn(null, {}), ms)
     }

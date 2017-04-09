@@ -3,6 +3,11 @@
   height: 100px;
 }
 
+.person {
+  position: fixed;
+  height: 100px;
+}
+
 .smooth {
   transition: transform 50ms linear;
   -webkit-transition: transform 50ms linear;
@@ -24,4 +29,15 @@
   background-image: url('/bg_square.svg');
   background-repeat: no-repeat;
   background-size: cover;
+
+}
+.preview {
+  height: 100%;
+  text-align: left;
+  background-image: url('/bg_square.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }

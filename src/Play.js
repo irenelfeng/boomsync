@@ -29,9 +29,12 @@ export default class Play extends Component {
     if (!playCoords) setPlayCoords()
     boomSpeed = (playCoords[1] / boomReturnTime) * 2
 
-    this.state.birds = this.props.level.events.map(({type, time}) =>
-      ({ coords: [100 + (time * birdSpeed), 50], dead: false })
+    this.state.birds = this.props.level.events.filter(({type, time}) => type.includes('bird'))
+      .map(({type, time}) =>
+        type == "brokenbird" ?  ({ coords: [100 + (time * birdSpeed), 50], dead: false, broken: true }) :
+          ({ coords: [100 + (time * birdSpeed), 50], dead: false })
     )
+
   }
 
   componentWillUnmount () {
@@ -42,6 +45,11 @@ export default class Play extends Component {
   componentDidMount () {
     let queuedBoomerangs = 0
 
+    // define fixBoomerang
+    const fixBoomerangs = () => {
+        console.log("FIXING BOOMERANGS")
+        this.state.boomerangs.forEach(b => b.broken = false)
+    }
     // define throwBoomerang
     const throwBoomerang = (fn) => {
       if (queuedBoomerangs == 2) {
@@ -55,10 +63,10 @@ export default class Play extends Component {
       setTimeout(() => {
         queuedBoomerangs--
         fn && fn(null, {})
-
+        if (this.state.boomerangs.filter(b => b.broken).length > 0 ) this.fail({ name: 'Failure', message: `You did not fix your boomerangs!`})
         if (queuedBoomerangs == 0) {
           if (this.state.birds.filter(b => !b.dead).length > 0) {
-            return this.fail({name: 'Failure', message: `A bird escaped!`})
+            return this.fail({ name: 'Failure', message: `A bird escaped!`})
           } else if (!this.failed) {
             return this.props.succeed()
           }
@@ -100,24 +108,34 @@ export default class Play extends Component {
 
     // Update bird position
     this.state.birds = this.state.birds.map((b, idx) => !birdsDead[idx]
-      ? ({ coords: [b.coords[0] - birdSpeed * tickInterval, b.coords[1]], dead: b.dead })
-      : ({ coords: [b.coords[0] + 10, b.coords[1] + 10], dead: true })
+      ? ({ coords: [b.coords[0] - birdSpeed * tickInterval, b.coords[1]], broken: b.broken, dead: false })
+      : ({ coords: [b.coords[0] + 10, b.coords[1] + 10], broken: b.broken, dead: true })
+    )
+
+    const gotBroken = (b) =>
+      this.state.birds.filter(({coords, broken}) => (broken && dist(b.coords, coords) < 50)).length > 0
+    // Check if any boomerangs were broken by hitting a broken bird
+    const boomerangsBroken = this.state.boomerangs.map(b => b.broken
+      ? true
+      : gotBroken(b)
     )
 
     // Update boomerang position
-    this.state.boomerangs = this.state.boomerangs.map(({coords, rotation, flightAngle, wayBack}) =>
+    this.state.boomerangs = this.state.boomerangs.map(({coords, rotation, flightAngle, wayBack, broken}, idx) =>
       wayBack || coords[1] < 50
         ? ({
-            coords: [coords[0], coords[1] + boomSpeed * tickInterval],
-            rotation: rotation + tickInterval,      // TODO
-            flightAngle: flightAngle + 1,// TODO
-            wayBack: true
-          })
+              coords: [coords[0], coords[1] + boomSpeed * tickInterval],
+              rotation: rotation + tickInterval,      // TODO
+              flightAngle: flightAngle + 1,// TODO
+              wayBack: true,
+              broken: broken ? true : boomerangsBroken[idx]
+            })
         : ({
             coords: [coords[0], coords[1] - boomSpeed * tickInterval],
             rotation: rotation + tickInterval,      // TODO
             flightAngle: flightAngle + 1,// TODO
-            wayBack: false
+            wayBack: false,
+            broken: broken ? true: boomerangsBroken[idx]
           })
     )
 
@@ -140,10 +158,16 @@ export default class Play extends Component {
         {birds.filter(b => b.dead).map((b, idx) => (
           <audio src='collision.mp3' key={idx} autoPlay='true' />
         ))}
+        {boomerangs.filter(b => b.broken).map((b, idx) => (
+          <audio src='break.mp3' key={idx} autoPlay='true' />
+        ))}
 
         {boomerangs.map((b, idx) => (
           <div className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
-            <img src={['/boomerang_redBoom.svg', 'boomerang_tapedBoom.svg'][idx % 2]}
+            <img src={!b.broken
+                ? ['/boomerang_tapedBoom.svg', 'boomerang_redBoom.svg'][idx % 2] :
+                ['/boomerang_brokenBoom.svg', 'boomerang_brokenBoom.svg'][idx % 2]
+              }
               className='smooth-rotate boomerang' key={`${idx}-${b.coords}`}
               style={{transform: `rotate(${b.rotation}deg)`}} />
           </div>

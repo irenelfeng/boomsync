@@ -46,9 +46,10 @@ export default class Play extends Component {
     let queuedBoomerangs = 0
 
     // define fixBoomerang
-    const fixBoomerangs = () => {
+    const fixBoomerangs = (fn) => {
         console.log("FIXING BOOMERANGS")
         this.state.boomerangs.forEach(b => b.broken = false)
+        fn && fn(null, {})
     }
     // define throwBoomerang
     const throwBoomerang = (fn) => {
@@ -60,14 +61,20 @@ export default class Play extends Component {
       this.state.boomerangs.push(generateBoomerang(queuedBoomerangs - 1))
       this.forceUpdate()
 
-      setTimeout(() => {
+      setTimeout((err) => {
         queuedBoomerangs--
-        fn && fn(null, {})
-        if (this.state.boomerangs.filter(b => b.broken).length > 0 ) this.fail({ name: 'Failure', message: `You did not fix your boomerangs!`})
+        if (this.state.boomerangs.filter(b => b.broken).length > 0 ) {
+          fn(Error("Did not fix boomerangs"), {})
+        } else {
+          fn && fn(null, {})
+        }
         if (queuedBoomerangs == 0) {
           if (this.state.birds.filter(b => !b.dead).length > 0) {
             return this.fail({ name: 'Failure', message: `A bird escaped!`})
           } else if (!this.failed) {
+            if (this.state.boomerangs.filter(b => b.broken).length > 0) {
+              return this.fail({ name: 'Failure', message: `You didn't fix your boomerangs`})
+            }
             return this.props.succeed()
           }
         }

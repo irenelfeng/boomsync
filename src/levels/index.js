@@ -21,13 +21,14 @@ const levels = [
   },
   {
     "level": 1,
-    "initialCode": "chill(1000, () => \n // write your code here \n );",
+    "initialCode": "chill(1000, () => {\n// write your code here\n});",
     "instructions": [
       `For this level, if you throw the boomerang right away you'll be too early.`,
       `You'll need to throw a boomerang in <b>1000</b> ms.`,
       `We've provided you a second function called <code>chill</code>.
       <code>chill(waitTime, callback)</code>
-      takes in two parameters: the first is how to wait in milliseconds before the second function is called.`,
+      takes in two parameters: the first is how long to wait in milliseconds before
+      the function in the second parameter is called.`,
       `This is called a <i> callback </i> function.`,
       `The optional parameter we can give to <code>throwBoomerang()</code> is also a callback.
       Callbacks are everywhere in asynchronous Javascript`,
@@ -44,7 +45,7 @@ const levels = [
   },
   {
     "level": 2,
-    "initialCode": "throwBoomerang() \n //write your code here",
+    "initialCode": "throwBoomerang()\n//write your code here",
     "instructions": [
       `Great job! However, this code did not take full advantage of the power of
       asynchronous execution, which is that while you're waiting for something
@@ -91,7 +92,45 @@ const levels = [
       },
 
     ]
+  },
+  {
+    "level": 4,
+    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow()\n\t.catch(fixBoomerangs)",
+    "instructions": [
+      `Whew! This is fun. But our boomerangs are taking a beating after killing so many birds. Our boomerangs might break at a random time!
+      We need to do something in case this happens, i.e. if the promise returned from <code>throwBoomerang()</code> rejects.`,
+      `Instead of a <code>.then()</code>, let's add a <code>.catch()</code> function to our function that will repair the boomerang if it breaks.
+      The function we call in our catch is <code>fixBoomerangs()</code> `,
+      `There are 3 birds in this round: one you can kill immediately, one you can kill after chilling for 2000 ms,
+      and one you can kill after chilling for 4000 ms. (we've programmed that the one you kill immediately will break your boomerang, but
+      in the real hunting world, and coding world, you never know when tragedy will strike: best practice if you catch for all three!)`,
+    ],
+    "events" : [
+      {
+        "type": 'brokenbird',
+        "time": 1000,
+      },
+      {
+        "type": 'bird',
+        "time": 3000,
+      },
+      {
+        "type": 'bird',
+        "time": 5000,
+      },
+    ]
+  },
+  {
+    "level": 5,
+    "initialCode": "",
+    "instructions": [
+      `Aren't promises lovely? You know what else is lovely?
+      Love! (Love)Birds are coming in pairs this time, so we need to throw two boomerangs at a time.`,
+      `Throw two pairs of boomerangs at a time: one `,
+      `Love is also very unexpected, so now there are a random number of birds `
+    ]
   }
+
 ]
 
 

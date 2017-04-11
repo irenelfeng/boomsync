@@ -47,6 +47,7 @@ export default class App extends Component {
     this.setState(() => ({
       isSubmitted: false,
       level: page - 1,
+      readyForNext: false,
       playing: false,
       failed: null,
     }))

@@ -45,9 +45,9 @@ export default class CodeEditor extends Component {
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
-          tabSize: 2,
           fontSize: 16,
         }}
+        tabSize={2}
         value={this.state.value}
         onChange={this.handleChange}
         height="50%"

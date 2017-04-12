@@ -68,42 +68,16 @@ const levels = [
   },
   {
     "level": 3,
-    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow().then(() => throwBoomerang())",
+    "initialCode": "throwBoomerang((err) => {\n\tif (err) {\n\t\t// write your code here\n\t}\n})",
     "instructions": [
-      `Awesome job! Next: Promises. A Promise is an object representing some asynchronous
-      operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled,
-      it resolves (optionally with a particular value). If a promise fails (rejects), it
-      is rejected with an error.`,
-      `In this example, you can use a library called <code>bluebird</code> to convert
-      a function that takes a callback to a function that returns a promise. Once you have
-      a promise, you register what it should resolve and reject with <code>.then</code>
-      and <code>.catch</code>.`,
-      `We've done this one for you while you're getting used to promises, so just press
-      submit and give it a go.`
-    ],
-    "events": [
-      {
-        "type": 'bird',
-        "time": 1000
-      },
-      {
-        "type": 'bird',
-        "time": 4000
-      },
-
-    ]
-  },
-  {
-    "level": 4,
-    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow()\n\t.catch(fixBoomerangs)",
-    "instructions": [
-      `Whew! This is fun. But our boomerangs are taking a beating after killing so many birds. Our boomerangs might break at a random time!
-      We need to do something in case this happens, i.e. if the promise returned from <code>throwBoomerang()</code> rejects.`,
-      `Instead of a <code>.then()</code>, let's add a <code>.catch()</code> function to our function that will repair the boomerang if it breaks.
-      The function we call in our catch is <code>fixBoomerangs()</code> `,
+      `Great! But boomerangs are taking a beating after killing so many birds. Our boomerangs might break at a random time!
+      The conventional way we deal with errors in asynchronous javascript is that if an error occurs during the execution of a function,
+      the error will return in the first parameter of the callback (Note: some functions also return with data in a second parameter,
+      though throwBoomerang() does not. You could get the value of the data by giving your arrow function <code>(err, data)</code> parameters).`,
       `There are 3 birds in this round: one you can kill immediately, one you can kill after chilling for 2000 ms,
-      and one you can kill after chilling for 4000 ms. (we've programmed that the one you kill immediately will break your boomerang, but
-      in the real hunting world, and coding world, you never know when tragedy will strike: best practice if you catch for all three!)`,
+      and one you can kill after chilling for 4000 ms. We've programmed that the one you kill immediately will break your boomerang, but
+      in the real hunting world, and coding world, you never know when tragedy will strike: best practice if you catch for all three!`,
+      `We've written out part of the first throwBoomerang function for you: call <code>fixBoomerangs()</code> to handle potential errors.`
     ],
     "events" : [
       {
@@ -121,13 +95,54 @@ const levels = [
     ]
   },
   {
-    "level": 5,
-    "initialCode": "",
+    "level": 4,
+    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow().then()",
     "instructions": [
-      `Aren't promises lovely? You know what else is lovely?
-      Love! (Love)Birds are coming in pairs this time, so we need to throw two boomerangs at a time.`,
-      `Throw two pairs of boomerangs at a time: one `,
-      `Love is also very unexpected, so now there are a random number of birds `
+      `Awesome job! Next: Promises. A Promise is an object representing some asynchronous
+      operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled,
+      it resolves (optionally with a particular value). If a promise fails (rejects), it
+      is rejected with an error.`,
+      `In this example, you can use a library called <code>bluebird</code> to convert
+      a function that takes a callback to a function that returns a promise. Once you have
+      a promise, you register what it should resolve and reject with <code>.then</code>
+      and <code>.catch</code>.`,
+      `To throw a boomerang right after the promise fulfills and we get our boomerang back,
+      make another anonymous function that calls <code>throwBoomerang()</code> within <code>.then</code>.`
+    ],
+    "events": [
+      {
+        "type": 'bird',
+        "time": 1000
+      },
+      {
+        "type": 'bird',
+        "time": 4000
+      },
+
+    ]
+  },
+  {
+    "level": 5,
+    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow()\n\t.catch(fixBoomerangs)",
+    "instructions": [
+      `Can we replicate some error catching code that we did in level 4 with promises? Sure thing: if the promise returned from <code>throwBoomerang()</code> rejects,`,
+      `we can add a <code>.catch()</code> function to our function to do some error handling.`,
+      `Again, there are 3 birds in this round: one you can kill immediately, one you can kill after chilling for 2000 ms,
+      and one you can kill after chilling for 4000 ms.`,
+    ],
+    "events" : [
+      {
+        "type": 'brokenbird',
+        "time": 1000,
+      },
+      {
+        "type": 'bird',
+        "time": 3000,
+      },
+      {
+        "type": 'bird',
+        "time": 5000,
+      },
     ]
   }
 

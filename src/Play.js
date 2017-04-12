@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import boomerang from './boomerang.svg'
 import Bluebird from 'bluebird'
 import './Play.css'
 
@@ -47,10 +46,10 @@ export default class Play extends Component {
 
     // define fixBoomerang
     const fixBoomerangs = (fn) => {
-      console.log("fixing boomerangs")
       this.state.boomerangs.forEach(b => b.broken = false)
       this.forceUpdate()
       fn && fn(null, {})
+      this.state.fixing = false
     }
 
     // get index of the first boomerang that is not being thrown right now
@@ -61,33 +60,41 @@ export default class Play extends Component {
     const throwBoomerang = (fn) => {
       const bidx = getAvailableBoomerang(this.state.boomerangs)
       if ( bidx == -1 ) {
+        this.failed = true
         return this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${2} boomerangs at once`})
       }
 
       if (this.state.boomerangs[bidx].broken) {
-        console.log("TRYING TO THROW BROKEN BOOMERANG")
+        this.failed = true
         return this.fail({ name: 'Failure', message: `Trying to throw a broken boomerang`})
       }
 
-      queuedBoomerangs++
+      ++queuedBoomerangs
       this.state.boomerangs[bidx] = generateBoomerang(bidx)
       this.forceUpdate()
 
       setTimeout((err) => {
         queuedBoomerangs--
-        this.state.boomerangs[bidx].throwing = false
+        this.state.boomerangs[bidx] = {
+          coords: this.state.boomerangs[bidx].coords,
+          rotation: this.state.boomerangs[bidx].rotation,
+          flightAngle: this.state.boomerangs[bidx].flightAngle,
+          wayBack: this.state.boomerangs[bidx].wayBack,
+          broken: this.state.boomerangs[bidx].broken,
+          throwing: false
+        }
         this.forceUpdate()
+
         if (this.state.boomerangs[bidx].broken) {
           fn(Error("Boomerang is broken"), {})
           console.log("BOOMERANG IS BROKEN!")
         } else {
           fn && fn(null, {})
         }
-        if (queuedBoomerangs == 0) {
+        if (queuedBoomerangs == 0 && !this.failed) {
           if (this.state.birds.filter(b => !b.dead).length > 0) {
             return this.fail({ name: 'Failure', message: `A bird escaped!`})
           } else if (!this.failed) {
-
             return this.props.succeed()
           }
         }
@@ -170,8 +177,8 @@ export default class Play extends Component {
           throwing: false
         })
     )
-
     this.forceUpdate()
+
   }
 
   render () {
@@ -195,7 +202,7 @@ export default class Play extends Component {
         ))}
 
         {boomerangs.map((b, idx) => (
-          <div className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
+          <div key={idx} className='smooth' style={{transform: `translate(${formatCoords(b.coords, 40)})`}} >
             <img src={!b.broken
                 ? ['/boomerang_tapedBoom.svg', 'boomerang_redBoom.svg'][idx % 2] :
                 ['/boomerang_brokenBoom.svg', 'boomerang_brokenBoom.svg'][idx % 2]

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Layout } from 'antd';
+const ButtonGroup = Button.Group;
 import './App.css'
 import Play from './Play'
 import Preview from './Preview'
@@ -8,7 +9,7 @@ import CodeEditor from './CodeEditor'
 import ErrorBox from './ErrorBox'
 import LevelIndicator from './LevelIndicator'
 
-const { Header, Content, Footer } = Layout
+const { Header, Content } = Layout
 
 export default class App extends Component {
   state = {
@@ -35,7 +36,15 @@ export default class App extends Component {
         failed: null
       }))
 
-  handleResetClick = () => { // TODO
+  replay = () => {
+    this.setState(prevState => ({
+        playing: true,
+        isSubmitted: true,
+        failed: null
+      }))
+  }
+
+  handleResetClick = () => {
     this.setState(() => ({
       playing: false,
       readyForNext: false,
@@ -73,6 +82,7 @@ export default class App extends Component {
 
   handleResetClick = () => {
     this.setState(() => ({
+      isSubmitted: false,
       playing: false,
       readyForNext: false,
       failed: null,
@@ -122,16 +132,26 @@ export default class App extends Component {
                 <Button type="danger" onClick={this.handleResetClick}>
                   Reset
                 </Button>
+                <ButtonGroup>
+                {
+                  this.state.readyForNext && !this.state.playing ? <Button type="default" onClick={this.replay}>
+                                            Replay
+                                            </Button>
+                                          : ''
+                }
                 <Button type="primary" loading={this.state.playing} onClick={this.handleClick}>
                   {this.state.isSubmitted
                     ? !this.state.playing
                       ? this.state.readyForNext
-                        ? 'Next'
+                        ? 'Next Level'
                         : 'Try Again'
                       : 'Running'
                     : 'Submit'
                   }
                 </Button>
+
+                </ButtonGroup>
+
               </div>
             </Content>
             <div className="foot">

@@ -63,7 +63,6 @@ export default class Play extends Component {
         this.failed = true
         return this.fail({name: 'Failure', message: `Sorry, you cannot throw more than ${2} boomerangs at once`})
       }
-
       if (this.state.boomerangs[bidx].broken) {
         this.failed = true
         return this.fail({ name: 'Failure', message: `Trying to throw a broken boomerang`})
@@ -74,7 +73,6 @@ export default class Play extends Component {
       this.forceUpdate()
 
       setTimeout((err) => {
-        queuedBoomerangs--
         this.state.boomerangs[bidx] = {
           coords: this.state.boomerangs[bidx].coords,
           rotation: this.state.boomerangs[bidx].rotation,
@@ -91,10 +89,9 @@ export default class Play extends Component {
         } else {
           fn && fn(null, {})
         }
+        queuedBoomerangs--
         if (queuedBoomerangs == 0 && !this.failed) {
-          if (this.state.birds.filter(b => !b.dead).length > 0) {
-            return this.fail({ name: 'Failure', message: `A bird escaped!`})
-          } else if (!this.failed) {
+          if (this.state.birds.filter(b => !b.dead).length == 0) {
             return this.props.succeed()
           }
         }
@@ -130,7 +127,7 @@ export default class Play extends Component {
 
     // Check if game is over
     if (birdsCrossed.length > 0) {
-      this.fail()
+      return this.fail({ name: 'Failure', message: `A bird escaped!`})
     }
 
     // Update bird position

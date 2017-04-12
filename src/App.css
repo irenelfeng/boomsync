@@ -9,15 +9,24 @@
   background-color: #bde5ec;
 }
 
+.ant-pagination-simple .ant-pagination-simple-pager input{
+  background-color: #bde5ec;
+  border: 1px #bde5ec;
+  transition: color .3s ease;
+}
+.ant-pagination-simple .ant-pagination-simple-pager input:hover{
+  border: 1px #d9d9d9 solid;
+  color: #108ee9;
+}
 .ant-pagination-item, .ant-pagination-prev, .ant-pagination-next {
   background-color: #bde5ec;
-  border: 1px solid #a1abe9;
+  border: 1px solid #d9d9d9;
   color: #fcfcfc;
 }
 
 .App {
   text-align: center;
-  display: flex;#fcfcfc
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;

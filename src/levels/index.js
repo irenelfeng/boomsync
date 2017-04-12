@@ -96,16 +96,28 @@ const levels = [
   },
   {
     "level": 4,
-    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow().then()",
+    "initialCode": `const promiseThrow = () => { return new Promise((resolve,reject) => {
+throwBoomerang((error, result)=>{
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+    });
+})};
+promiseThrow().then(() => {
+   //write code here
+})
+.catch(error => fixBoomerangs());`,
     "instructions": [
       `Awesome job! Next: Promises. A Promise is an object representing some asynchronous
       operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled,
       it resolves (optionally with a particular value). If a promise fails (rejects), it
       is rejected with an error.`,
-      `In this example, you can use a library called <code>bluebird</code> to convert
-      a function that takes a callback to a function that returns a promise. Once you have
-      a promise, you register what it should resolve and reject with <code>.then</code>
-      and <code>.catch</code>.`,
+      `To make a promise, we construct a Promise object which takes in one parameter:
+      a function with two callbacks, a resolve and reject. The function should be asynchronous that
+      resolves on success and rejects with some kind of error.
+      We can handle successes by calling <code>.then</code> on the Promise object, and errors with <code>.catch</code>.`,
       `To throw a boomerang right after the promise fulfills and we get our boomerang back,
       make another anonymous function that calls <code>throwBoomerang()</code> within <code>.then</code>.`
     ],
@@ -123,9 +135,32 @@ const levels = [
   },
   {
     "level": 5,
-    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow()\n\t.catch(fixBoomerangs)",
+    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow().then(() =>{\n\t \n})",
     "instructions": [
-      `Can we replicate some error catching code that we did in level 4 with promises? Sure thing: if the promise returned from <code>throwBoomerang()</code> rejects,`,
+      `Awesome job! Promises are really great, but they do take a lot of code to create.`,
+      `In this example, you can use a library called <code>bluebird</code> to convert
+      a function that takes a callback to a promise. Once you create that object using <code>.promisify(fn)</code>,
+      You register what it should resolve with <code>.then</code>
+      and reject with <code>.catch</code> as usual.`,
+      `The birds come at the same time as the previous level, so throw a boomerang right when the promise from the first boomerang resolves.`
+    ],
+    "events": [
+      {
+        "type": 'bird',
+        "time": 1000
+      },
+      {
+        "type": 'bird',
+        "time": 4000
+      },
+
+    ]
+  },
+  {
+    "level": 6,
+    "initialCode": "const promiseThrow = bluebird.promisify(throwBoomerang)\npromiseThrow()\n\t.catch(() => fixBoomerangs())",
+    "instructions": [
+      `Can we replicate some error catching code that we did with callbacks, but with promises? Sure thing: if the promise returned from <code>throwBoomerang()</code> rejects,`,
       `we can add a <code>.catch()</code> function to our function to do some error handling.`,
       `Again, there are 3 birds in this round: one you can kill immediately, one you can kill after chilling for 2000 ms,
       and one you can kill after chilling for 4000 ms.`,
@@ -144,6 +179,11 @@ const levels = [
         "time": 5000,
       },
     ]
+  },
+  {
+    level: 7,
+    "instructions": ["Out of levels! Nice bird hunting. "],
+    "initialCode": ''
   }
 
 ]

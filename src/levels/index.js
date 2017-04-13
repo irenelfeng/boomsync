@@ -96,16 +96,16 @@ const levels = [
   },
   {
     "level": 4,
-    "initialCode": `const promiseThrow = () => { return new Promise((resolve,reject) => {
-throwBoomerang((error, result)=>{
-        if (error) {
-          reject(error);
-        } else {
-          resolve(result);
-        }
-    });
-})};
-promiseThrow().then(() => {
+    "initialCode": `const promiseThrow = new Promise((resolve,reject) => {
+throwBoomerang((error, result) => {
+    if (error) {
+      reject(error);
+    } else {
+      resolve(result);
+    }
+  });
+});
+promiseThrow.then(() => {
    //write code here
 })
 .catch(error => fixBoomerangs());`,
@@ -113,7 +113,7 @@ promiseThrow().then(() => {
       `Awesome job! Next: Promises. A Promise is an object representing some asynchronous
       operation, and it can be either pending, fullfilled, or rejected. If a promise is fullfilled,
       it resolves (optionally with a particular value). If a promise fails (rejects), it
-      is rejected with an error.`,
+      is rejected with an error. The wrapping of our function in an object allows us to separate errors from successes.`,
       `To make a promise, we construct a Promise object which takes in one parameter:
       a function with two callbacks, a resolve and reject. The function should be asynchronous that
       resolves on success and rejects with some kind of error.

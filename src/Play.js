@@ -87,7 +87,11 @@ export default class Play extends Component {
           fn(Error("Boomerang is broken"), {})
           console.log("BOOMERANG IS BROKEN!")
         } else {
-          fn && fn(null, {})
+          // if a reference to a function is called, then there is no callback, fn is an empty Object
+          // lol
+          fn && typeof fn === "function" && fn(null, {})
+
+
         }
         queuedBoomerangs--
         if (queuedBoomerangs == 0 && !this.failed) {
@@ -101,7 +105,7 @@ export default class Play extends Component {
 
     // chill function
     const chill = (ms, fn) => {
-      setTimeout(() => fn && fn(null, {}), ms)
+      setTimeout(() => fn && typeof fn === "function" && fn(null, {}), ms)
     }
 
     try {
